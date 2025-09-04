@@ -1,0 +1,4 @@
+baseURL = 'https://relivnd.dev/'
+languageCode = 'en-us'
+title = 'relivnd'
+theme = 'hugo-PaperMod'
