@@ -1,0 +1,43 @@
+baseURL: "https://relivnd.dev/"
+languageCode: "en-us"
+title: "relivnd"
+theme: "hugo-PaperMod"
+params:
+  profileMode:
+    enabled: true
+    title: "Hi There!" # optional default will be site title
+    subtitle: "I'm Tobi, a Cloud Consultant / Tech. Sales Engineer / DevOps evangelist / Cloud Computing advocate from Switzerland. I'm bridging the Gap Between Cloud Challenges and AWS Solutions"
+    imageUrl: "https://relivnd.dev/content/images/2024/06/aws-certified-solutions-architect-associate.png" # optional
+    # imageTitle: "<title of image as alt>" # optional
+    imageWidth: 120 # custom size
+    imageHeight: 120 # custom size
+    buttons:
+      - name: Blog
+        url: "/posts"
+      - name: About Me
+        url: "/posts"
+      - name: copebit AG
+        url: "https://www.copebit.ch/en/home/"
+
+  socialIcons: # optional
+    - name: "linkedin"
+      url: "https://www.linkedin.com/in/relivnd/"
+    - name: "github"
+      url: "https://github.com/relivnd"
+    - name: "dev"
+      url: "https://dev.to/relivnd"
+    - name: "mastodon"
+      url: "https://mastodon.social/@relivnd"
+
+  ShowShareButtons: true
+  ShareButtons: ["linkedin", "twitter"] # To customize which share buttons to be enabled on page
+
+  ShowReadingTime: true
+  ShowToc: true
+  ShowBreadCrumbs: true
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON # necessary for search
