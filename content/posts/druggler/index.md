@@ -1,8 +1,15 @@
-+++
-date = '2023-05-18T14:21:00+02:00'
-draft = true
-title = 'Druggler'
-+++
+---
+title: "Druggler"
+summary: Learn About All Features in PaperMod
+date: '2023-05-18T14:21:00+02:00'
+weight: 2
+tags: ["JavaScript", "Projects"]
+author: ["relivnd"]
+social:
+  fediverse_creator: "@relivnd@mastodon.social"
+cover-image: "/posts/druggler/cover.png"
+---
+
 Druggler is a small application written in pure JavaScript to visualize differences in drug usage in different countries. Steve, the drug information dealer, guides the user through the numbers, cracks jokes and makes comparisons.
 
 Why?

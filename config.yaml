@@ -15,7 +15,7 @@ params:
       - name: Blog
         url: "/posts"
       - name: About Me
-        url: "/posts"
+        url: "/aboutme"
       - name: copebit AG
         url: "https://www.copebit.ch/en/home/"
 
