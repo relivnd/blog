@@ -7,8 +7,10 @@ tags: ["AWS", "Development", "Tools", "Cloud"]
 author: ["relivnd"]
 social:
   fediverse_creator: "@relivnd@mastodon.social"
-cover-image: "//posts/develop-remotely-with-zed-aws/cover.png"
+cover-image: "/posts/develop-remotely-with-zed-aws/Develop-remotely-with-Zed---AWS-1.png"
 ---
+
+![Header](Develop-remotely-with-Zed---AWS-1.png)
 
 **tl;dr** Zed, a fast Rust-based code editor, now supports remote development via SSH, letting developers offload resource-heavy tasks to cloud servers like AWS EC2. This feature simplifies workflows, enables cross-device coding, and supports projects requiring specific architectures or AWS integrations. A quick setup guide outlines connecting Zed to EC2 for seamless remote coding.
 
@@ -21,6 +23,8 @@ Two weeks ago Zed Industries, the company behind my favourite code editor Zed, a
 [SSH Remoting is Here! - Zed Blog](https://zed.dev/blog/ssh-remoting)
 
 I've been using Zed for quite some time now. So naturally I was very excited to test out this new feature once it was announced. How it works is very simple. Once you connect through SSH to your remote server, Zed is downloading and installing the Zed Remote Server binary. This binary works with almost all Linux distros (check documentation for compatibilities) and can even be installed straight from your local machine.
+
+![](zed_documentation.png)
 
 That's it. You just connect your IDE through SSH to your remote server and start coding...
 
@@ -61,13 +65,23 @@ In this short tutorial, I want to show you how you can set up a simple EC2 insta
 
 Log in to the AWS console, go to the EC2 page and launch a new instance.
 
+![](Screenshot-2024-11-14-at-09.12.22-Large.png)
+
 Name your instance and change the Linux image and processor architecture to your liking. For this tutorial, we're going to use the standard Amazon Linux AMI and an arm architecture-based processor.
+
+![](Screenshot-2024-11-14-at-09.13.40-Large.png)
 
 Don't forget to create or assign an SSH key pair.
 
+![](Screenshot-2024-11-14-at-09.14.36-Large.png)
+
 Create or select an existing security group. SSH traffic must be allowed from where you're trying to log in. Also, be sure your instance is deployed in a subnet which has internet access through a gateway and that all routes are configured accordingly. Otherwise, you might encounter issues connecting to your EC2 instance.
 
+![](Screenshot-2024-11-14-at-09.16.28-Large.png)
+
 Launch the instance and wait until the instance enters the **Running** state. Copy your public IPv4 DNS record and open your terminal.
+
+![](Screenshot-2024-11-14-at-09.19.15-Large.png)
 
 To connect to your instance, use the SSH client of your liking. We're using the default ssh client of MacOS. Try:
 
@@ -77,11 +91,19 @@ ssh -i SSH-KEY-FILE-LOCATION IPv4-DNS-Record
 
 Once you're logged in, we create a project folder - in our case _fancy-project_ - and create a new virtual environment for Python. Additionally, we create an empty _main.py_ file. SSH works as we would expect.
 
+![](Screenshot-2024-11-14-at-09.24.32.png)
+
 Now we copy the SSH command we just used in the terminal and open Zed. Press _^ + cmd + o_ at the same time to open the Remote Projects window. Click on _+ Connect New Server_ and paste the SSH command from before. Press enter.
+
+![](Screenshot-2024-11-14-at-09.25.44.png)
 
 When Zed has connected successfully to your instance, it asks you to select a folder to open as a project. We choose our _fancy-project_ folder.
 
+![](Screenshot-2024-11-14-at-09.26.25.png)
+
 Zed is sourcing the venv automatically and we can already see our previously created _main.py_ file in the file explorer. We write a simple _hello world_ script and execute the script using the terminal.
+
+![](Screenshot-2024-11-14-at-09.28.47.png)
 
 And that's how you connect Zed to your remote development instance. From here you can just develop.
 

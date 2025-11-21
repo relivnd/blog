@@ -6,8 +6,7 @@ params:
   profileMode:
     enabled: true
     title: "Hi There!" # optional default will be site title
-    subtitle: "I'm Tobi, a Cloud Consultant / Tech. Sales Engineer / DevOps evangelist / Cloud Computing advocate from Switzerland. I'm bridging the Gap Between Cloud Challenges and AWS Solutions"
-    imageUrl: "https://relivnd.dev/content/images/2024/06/aws-certified-solutions-architect-associate.png" # optional
+    subtitle: "I'm Tobi, a Cloud Consultant / Technical Sales Engineer / DevOps evangelist / Cloud Computing advocate from Switzerland. Currently I work @ copebit AG"
     # imageTitle: "<title of image as alt>" # optional
     imageWidth: 120 # custom size
     imageHeight: 120 # custom size
@@ -16,6 +15,10 @@ params:
         url: "/posts"
       - name: About Me
         url: "/aboutme"
+      - name: Tools
+        url: "/tools"
+      - name: Talks
+        url: "/talks"
       - name: copebit AG
         url: "https://www.copebit.ch/en/home/"
 
@@ -28,12 +31,13 @@ params:
       url: "https://dev.to/relivnd"
     - name: "mastodon"
       url: "https://mastodon.social/@relivnd"
+    - name: "email"
+      url: "mailto:hej@relivnd.dev"
 
   ShowShareButtons: true
-  ShareButtons: ["linkedin", "twitter"] # To customize which share buttons to be enabled on page
+  ShareButtons: ["linkedin"] # To customize which share buttons to be enabled on page
 
   ShowReadingTime: true
-  ShowToc: true
   ShowBreadCrumbs: true
 
 outputs:
