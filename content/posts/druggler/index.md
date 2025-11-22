@@ -7,8 +7,9 @@ tags: ["JavaScript", "Projects"]
 author: ["relivnd"]
 social:
   fediverse_creator: "@relivnd@mastodon.social"
-cover-image: "/posts/druggler/cover.png"
 ---
+
+![](Bildschirmfoto-2024-05-12-um-19.44.03.png)
 
 Druggler is a small application written in pure JavaScript to visualize differences in drug usage in different countries. Steve, the drug information dealer, guides the user through the numbers, cracks jokes and makes comparisons.
 

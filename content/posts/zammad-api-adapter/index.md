@@ -7,8 +7,9 @@ tags: ["JavaScript", "API", "Projects", "Open Source"]
 author: ["relivnd"]
 social:
   fediverse_creator: "@relivnd@mastodon.social"
-cover-image: "//posts/zammad-api-adapter/cover.png"
 ---
+
+![](photo-1565049981953-379c9c2a5d48.jpeg)
 
 ❗**Disclaimer:** This blog text was initially written for the blog of my former employer TEQLY. It has been translated and reposted here.
 

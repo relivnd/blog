@@ -1,5 +1,5 @@
 ---
-title: "What happens if you leak AWS Credentials in GitHub? 🔐 😱"
+title: "What happens if you leak AWS Credentials in GitHub?"
 summary: "Mishaps can happen. An ill-considered git add . and you accidentally push your .env file containing AWS credentials into a public GitHub repository. I've conducted a small experiment with an empty account to show you what happens next."
 date: '2024-06-26T00:00:00+02:00'
 weight: 4
@@ -7,8 +7,9 @@ tags: ["AWS", "Security", "GitHub", "DevOps"]
 author: ["relivnd"]
 social:
   fediverse_creator: "@relivnd@mastodon.social"
-cover-image: "//posts/aws-credentials-github-leak/cover.png"
 ---
+
+![Header Image](Blog_Post_Title_Picture-1.png)
 
 Mishaps can happen. An ill-considered `git add .` and you accidentally push your .env file containing AWS credentials into a public GitHub repository. I've conducted a small experiment with an empty account to show you what happens next.
 
@@ -22,6 +23,8 @@ To start our experiment, we need to make some preparations first and set up our 
 
 Since we're talking about AWS-specific things, let's get familiar with the AWS vocabulary first. In AWS, Accounts are containers which bundle AWS resources and services. All you need to open an account are an email address and a valid credit card. Hobbyists might use a single account and run multiple workloads in them. Businesses and professionals should segregate different workloads into different accounts for security purposes. Why this is important will be clear by the end of this article.
 
+![](Blank-diagram---Page-1.png)
+
 For our experiment, we start with an empty account and create an IAM User. We shall call it _careless_user_. A user is an entity in an AWS Account that has certain roles or permissions attached either directly to itself or to a user group it belongs. In our case, our user doesn't need any permissions, since we don't want it to perform any actions on AWS.
 
 ### Access Keys
@@ -32,9 +35,13 @@ To authenticate as this user, we need to create some access key. Access keys are
 
 Once the credentials are created, you can either copy and paste them to a secure location or download the .csv file.
 
+![](Screenshot-2024-06-13-at-18.21.44.png)
+
 ### Repository
 
 To see what happens when we push AWS secrets into a public GitHub repository, we need a public GitHub repository. In our case, I created one and called it _careless_access_keys_.
+
+![](Screenshot-2024-06-13-at-18.23.28.png)
 
 ### Application
 
@@ -61,17 +68,27 @@ With all the requirements set up, it's time to push some secrets to GitHub.
 
 We add and commit all the files to our Git repository. If we now try to push (even with the --force flag set), GitHub won't let us. We face the following error message:
 
+![](image-1.png)
+
 > GH013: Repository rule violations found for refs/heads/main
 
 This is good news. GitHub won't let us push secret-looking strings to our repository by default. Thus we follow the link presented and head over to GitHub.
 
+![](Screenshot-2024-06-13-at-18.47.11.png)
+
 We select one of the three options and allow us to expose the secret-looking file.
+
+![](Screenshot-2024-06-13-at-18.46.20.png)
 
 ### Second try
 
 We now push again and won't face the error message. Almost instantly our files become visible on GitHub.
 
+![](Screenshot-2024-06-13-at-18.50.37.png)
+
 But within seconds we receive three emails. Two regarding the exposition and one regarding the automatically opened support case.
+
+![](image.png)
 
 What has happened? Let's go through the first email and read what AWS is asking us to do:
 
@@ -127,6 +144,8 @@ There's no way of knowing who has our keys after a leak. Whoever has them can pe
 ### Secret Scanning
 
 GitHub has a feature called Secret Scanning. Secret scanning is by default scanning all commits if they contain any secret-looking information. AWS secrets follow a known pattern. Thus GitHub tries to prevent us from pushing them in the first place. Since AWS is partnering up with GitHub to prevent any damage to its customers and own infrastructure, the secret-looking strings are sent to AWS where they trigger the response in the form of the account restrictions and the support case.
+
+![](secret-scanning-flow.png)
 
 If a business is operating a platform using secret strings you can as well partner up with GitHub to prevent your customers from leaking secrets. Find more information at the [Secret scanning partner program](https://docs.github.com/en/code-security/secret-scanning/secret-scanning-partner-program).
 

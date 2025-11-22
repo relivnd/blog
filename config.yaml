@@ -2,12 +2,19 @@ baseURL: "https://relivnd.dev/"
 languageCode: "en-us"
 title: "relivnd"
 theme: "hugo-PaperMod"
+enableInlineShortcodes: true
+enableRobotsTXT: true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+enableEmoji: true
 params:
   profileMode:
     enabled: true
     title: "Hi There!" # optional default will be site title
     subtitle: "I'm Tobi, a Cloud Consultant / Technical Sales Engineer / DevOps evangelist / Cloud Computing advocate from Switzerland. Currently I work @ copebit AG"
-    # imageTitle: "<title of image as alt>" # optional
+    imageUrl: "images/relivnd_logo.png"
+    imageTitle: "relivnd logo" # optional
     imageWidth: 120 # custom size
     imageHeight: 120 # custom size
     buttons:

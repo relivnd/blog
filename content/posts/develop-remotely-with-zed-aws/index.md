@@ -7,7 +7,6 @@ tags: ["AWS", "Development", "Tools", "Cloud"]
 author: ["relivnd"]
 social:
   fediverse_creator: "@relivnd@mastodon.social"
-cover-image: "/posts/develop-remotely-with-zed-aws/Develop-remotely-with-Zed---AWS-1.png"
 ---
 
 ![Header](Develop-remotely-with-Zed---AWS-1.png)
