@@ -22,3 +22,9 @@ jobs:
 
       - name: Build
         run: hugo --minify
+
+      - name: Deploy to S3
+        run: aws s3 sync public/ s3://blog.relivnd.dev --delete
+
+      - name: Invalidate CloudFront
+        run: aws cloudfront create-invalidation --distribution-id E2LOIVE2VIQGWU --paths "/*"
