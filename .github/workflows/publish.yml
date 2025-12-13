@@ -18,7 +18,7 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: 'latest'
+          hugo-version: "latest"
 
       - name: Build
         run: hugo --minify
@@ -32,7 +32,7 @@ jobs:
       - name: Deploy to S3
         run: |
           echo "Syncing to S3..."
-          aws s3 sync public/ s3://blog.relivnd.dev --delete --debug
+          aws s3 sync public/ s3://blog.relivnd.dev --delete
 
       - name: Invalidate CloudFront
         run: |
