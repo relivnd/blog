@@ -23,8 +23,18 @@ jobs:
       - name: Build
         run: hugo --minify
 
+      - name: Check AWS CLI
+        run: |
+          which aws || echo "AWS CLI not found"
+          aws --version || echo "AWS CLI version check failed"
+          aws sts get-caller-identity || echo "AWS credentials not configured"
+
       - name: Deploy to S3
-        run: aws s3 sync public/ s3://blog.relivnd.dev --delete
+        run: |
+          echo "Syncing to S3..."
+          aws s3 sync public/ s3://blog.relivnd.dev --delete --debug
 
       - name: Invalidate CloudFront
-        run: aws cloudfront create-invalidation --distribution-id E2LOIVE2VIQGWU --paths "/*"
+        run: |
+          echo "Creating CloudFront invalidation..."
+          aws cloudfront create-invalidation --distribution-id E2LOIVE2VIQGWU --paths "/*"
