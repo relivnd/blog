@@ -1,0 +1,24 @@
+name: Publish Blog
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    name: Build Hugo Site
+    runs-on:
+      - codebuild-relivnd_blog_pipeline-${{ github.run_id }}-${{ github.run_attempt }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest'
+
+      - name: Build
+        run: hugo --minify
