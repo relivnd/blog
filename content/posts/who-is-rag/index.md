@@ -31,7 +31,7 @@ It seemed to be the ideal vehicle to showcase the RAG PoC, because it's a game b
 
 ![](6189fdca-94d5-461d-8bcf-cca63de4c3de.png)
 
-Thanks to our great team dynamic, the idea sparked a fire and together with Chrishon and Besjan we started working on a prototype.
+Thanks to our great team dynamic, the idea sparked a fire and together with [Chrishon](https://www.linkedin.com/in/chrishon-nilanthan-13aa071b5/) and [Besjan](https://www.linkedin.com/in/besjan-sejrani/) we started working on a prototype.
 
 ## How Does Retrieval Augmented Generation Work?
 
@@ -93,7 +93,7 @@ After some prompt engineering, the game became playable using the new faces and 
 
 My colleague Besjan developed the frontend of the application. He used React and NextJS and really went the extra mile. Over several iterations, he worked through the user stories we provided him and optimized the frontend on his own to enhance user enjoyment.
 
-This frontend is also the result of extensive user testing. We believe the game rules had to be clear from the start. It took us multiple iterations until we were satisfied with the result. Still, thanks to our dynamic colleagues within tecRacer Group, we could find sufficient test subjects for numerous iterations of user testing.
+This frontend is also the result of extensive user testing. We believe the game rules had to be clear from the start. It took us multiple iterations until we were satisfied with the result. Still, thanks to our dynamic colleagues within [tecRacer Group](https://www.tecracer.com/), we could find sufficient test subjects for numerous iterations of user testing.
 
 The frontend is straightforward yet effective. Once the game is started, the user is presented with a grid of faces. The player can ask closed questions (yes or no answers only) in the chatbox on the upper-right side to narrow down the randomly selected person we're looking for. Clicking on the faces causes the cards to flip, similar to the original board game.
 
@@ -117,7 +117,3 @@ If the player is certain, they can make a guess using the guess button next to t
 ## Outlook
 
 We will use the game at upcoming events or fairs to demonstrate the power of RAG and hope to inspire visitors to use this fascinating technology. We are also considering making the game mobile-first and/or public. We have not decided on this yet, but if you're following me on LinkedIn, you'll be the first to know. If you would like a demo of the game or the RAG PoC (for example, in combination with your company data), please get in touch with me and we will arrange something.
-
-## Thanks
-
-Subscribe to my newsletter to find out when I next have something exciting to tell you from the world of IT and the cloud. For inquiries regarding projects, please refer to my employer [tecRacer](https://tecracer.ch). With hundreds of certifications, years of experience and dozens of trainings we Cloud Enable your Business!

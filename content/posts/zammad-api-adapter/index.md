@@ -45,4 +45,4 @@ const ZammadTicketCreator = new ZammadTicketCreator(serverUrl, fingerprint, sour
 ZammadTicketCreator.send("Customer Name","test@email.com", {this: "test"})
 ```
 
-At TEQLY we mainly work with open-source projects. We are happy to be able to benefit from the intellectual property of others. For this reason, we would like to give something back from time to time. Perhaps in the near future someone else will encounter the same problem or want to develop the adapter further. The adapter is free to download in the NPM directory.
+At TEQLY we mainly work with open-source projects. We are happy to be able to benefit from the intellectual property of others. For this reason, we would like to give something back from time to time. Perhaps in the near future someone else will encounter the same problem or want to develop the adapter further. The adapter is free to download in the [NPM directory](https://www.npmjs.com/package/zammad-ticket-creator).
