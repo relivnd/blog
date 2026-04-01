@@ -9,6 +9,8 @@ buildFuture: false
 buildExpired: false
 enableEmoji: true
 params:
+  author:
+    name: "relivnd"
   profileMode:
     enabled: true
     title: "Hi There!" # optional default will be site title
