@@ -1,6 +1,6 @@
 baseURL: "https://eu-central-2.ch/"
 languageCode: "en-us"
-title: "relivnd"
+title: "eu-central-2"
 theme: "hugo-PaperMod"
 enableInlineShortcodes: true
 enableRobotsTXT: true
@@ -13,8 +13,8 @@ params:
     name: "relivnd"
   profileMode:
     enabled: true
-    title: "Hi There!" # optional default will be site title
-    subtitle: "I'm Tobi, a Cloud Consultant / Technical Sales Engineer / DevOps evangelist / Cloud Computing advocate from Switzerland. Currently I work @ copebit AG"
+    title: "Welcome to eu-central-2" # optional default will be site title
+    subtitle: "I'm Tobi. A Cloud Consultant from eu-central-2 (Zürich). This is the place where I write about AWS, Cloud Computing, DevOps and everything else. Currently I work @ copebit AG"
     imageWidth: 120 # custom size
     imageHeight: 120 # custom size
     buttons:
