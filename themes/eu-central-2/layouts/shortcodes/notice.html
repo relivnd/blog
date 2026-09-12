@@ -1,0 +1,10 @@
+{{- /*
+  notice — callout box.
+
+  Usage: {{< notice type="warning" >}}Mind the blast radius.{{< /notice >}}
+  Types: note (default), tip, warning, danger.
+*/ -}}
+{{- $type := .Get "type" | default "note" -}}
+<aside class="notice notice--{{ $type }}" role="note">
+  {{ .Inner | markdownify }}
+</aside>

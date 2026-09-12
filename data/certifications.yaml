@@ -1,0 +1,59 @@
+# Certifications shown in the homepage carousel.
+#
+# Fields:
+#   title  (required) — caption under the badge
+#   image  (required) — either a path under assets/ (processed to WebP at
+#                       build time) or any URL/absolute path used verbatim
+#   issuer (optional) — appended to the generated alt text
+#   url    (optional) — credential verification link; makes the badge clickable
+#   alt    (optional) — overrides the generated alt text entirely
+#
+# The image paths below point at the badges already published by the
+# content/aboutme/ page bundle, so this works with no file moves. To get
+# build-time WebP thumbnails instead, copy the PNGs into
+# assets/certifications/ and change each `image` to
+# "certifications/<file>.png" — the partial prefers assets/ when it finds a
+# match. See the theme README.
+#
+# TODO(relivnd): add `url:` credential links. Verified badges are worth more
+# than pictures of badges.
+
+- title: "AWS Certified Solutions Architect – Professional"
+  issuer: "Amazon Web Services"
+  image: "/aboutme/aws-certified-solutions-architect-professional.png"
+
+- title: "AWS Certified DevOps Engineer – Professional"
+  issuer: "Amazon Web Services"
+  image: "/aboutme/aws-certified-devops-engineer-professional.png"
+
+- title: "AWS Certified Developer – Associate"
+  issuer: "Amazon Web Services"
+  image: "/aboutme/aws-certified-developer-associate.png"
+
+- title: "AWS Certified Solutions Architect – Associate"
+  issuer: "Amazon Web Services"
+  image: "/aboutme/aws-certified-solutions-architect-associate.png"
+
+- title: "AWS Certified SysOps Administrator – Associate"
+  issuer: "Amazon Web Services"
+  image: "/aboutme/aws-certified-sysops-administrator-associate.png"
+
+- title: "Certified Kubernetes Administrator (CKA)"
+  issuer: "The Linux Foundation"
+  image: "/aboutme/cka-certified-kubernetes-administrator.png"
+
+- title: "Certified Kubernetes Application Developer (CKAD)"
+  issuer: "The Linux Foundation"
+  image: "/aboutme/ckad-certified-kubernetes-application-developer.png"
+
+- title: "Certified Argo Project Associate (CAPA)"
+  issuer: "The Linux Foundation"
+  image: "/aboutme/capa-certified-argo-project-associate.png"
+
+- title: "HashiCorp Certified: Terraform Associate (003)"
+  issuer: "HashiCorp"
+  image: "/aboutme/hashicorp-certified-terraform-associate-003.png"
+
+- title: "AWS Community Builder"
+  issuer: "Amazon Web Services"
+  image: "/aboutme/Community-Builders-social-1200px.png"

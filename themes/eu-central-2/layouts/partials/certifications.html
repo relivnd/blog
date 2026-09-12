@@ -1,0 +1,70 @@
+{{- /*
+  certifications.html — manual carousel of certification badges.
+
+  Data source: data/certifications.yaml (see that file for the schema).
+  A data file rather than a glob of the PNG directory, because each badge
+  needs an accessible name and a credential link — the markdown table this
+  replaces rendered ten images with empty alt attributes.
+
+  Image resolution is two-tier:
+    1. assets/<image>  -> processed to WebP thumbnails at build time
+    2. otherwise       -> used verbatim as a URL
+  Tier 2 means the badges already published by the aboutme page bundle work
+  immediately; move the files into assets/certifications/ to get tier 1.
+
+  No autoplay by design: nothing moves unless the reader moves it.
+*/ -}}
+{{- with hugo.Data.certifications }}
+<div class="carousel" data-carousel-root>
+  <div class="carousel__nav">
+    <button class="carousel__btn" type="button" data-carousel="prev"
+            aria-label="{{ i18n "carousel_prev" }}" aria-controls="cert-track">
+      {{- partial "icon.html" "chevron-left" }}
+    </button>
+    <button class="carousel__btn" type="button" data-carousel="next"
+            aria-label="{{ i18n "carousel_next" }}" aria-controls="cert-track">
+      {{- partial "icon.html" "chevron-right" }}
+    </button>
+  </div>
+
+  {{- /* tabindex makes the track focusable so arrow keys reach the handler
+         and keyboard users can scroll it without a pointer. */ -}}
+  <div class="carousel__viewport" id="cert-track" tabindex="0" role="group"
+       aria-label="{{ i18n "certifications" }}. {{ i18n "certifications_hint" }}">
+    {{- range . }}
+      {{- $alt := .alt -}}
+      {{- if not $alt -}}
+        {{- $alt = .title -}}
+        {{- with .issuer }}{{ $alt = printf "%s — %s" $alt . }}{{ end -}}
+      {{- end -}}
+      {{- $src := "" -}}
+      {{- $w := 0 -}}
+      {{- $h := 0 -}}
+      {{- with resources.Get .image -}}
+        {{- with .Fit "320x320 webp q85" -}}
+          {{- $src = .RelPermalink -}}
+          {{- $w = .Width -}}
+          {{- $h = .Height -}}
+        {{- end -}}
+      {{- else -}}
+        {{- $src = .image | relURL -}}
+      {{- end }}
+
+      {{- if .url }}
+    <a class="carousel__item" href="{{ .url }}" rel="noopener" target="_blank">
+      {{- else }}
+    <div class="carousel__item">
+      {{- end }}
+      <img src="{{ $src }}" alt="{{ $alt }}"
+           {{- if $w }} width="{{ $w }}" height="{{ $h }}"{{ end }}
+           loading="lazy" decoding="async">
+      <span class="carousel__caption">{{ .title }}</span>
+      {{- if .url }}
+    </a>
+      {{- else }}
+    </div>
+      {{- end }}
+    {{- end }}
+  </div>
+</div>
+{{- end }}

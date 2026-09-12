@@ -1,0 +1,12 @@
+{{- /*
+  collapse — native disclosure widget.
+
+  Usage:
+    {{< collapse summary="Show the full manifest" >}}
+    ...markdown...
+    {{< /collapse >}}
+*/ -}}
+<details class="toc">
+  <summary>{{ .Get "summary" | default "Details" }}</summary>
+  <div class="prose" style="margin-top: var(--sp-4)">{{ .Inner | markdownify }}</div>
+</details>

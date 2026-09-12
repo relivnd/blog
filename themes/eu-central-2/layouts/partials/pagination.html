@@ -1,0 +1,13 @@
+{{- /* pagination.html — simple prev/next pager. */ -}}
+{{- $p := .Paginator -}}
+{{- if gt $p.TotalPages 1 }}
+<nav class="pagination" aria-label="Pagination">
+  {{- with $p.Prev }}
+  <a class="btn btn--sm" href="{{ .URL }}" rel="prev">{{ partial "icon.html" "chevron-left" }} {{ i18n "prev_page" }}</a>
+  {{- end }}
+  <span class="pagination__label">{{ i18n "page_of" (dict "current" $p.PageNumber "total" $p.TotalPages) }}</span>
+  {{- with $p.Next }}
+  <a class="btn btn--sm" href="{{ .URL }}" rel="next">{{ i18n "next_page" }} {{ partial "icon.html" "chevron-right" }}</a>
+  {{- end }}
+</nav>
+{{- end }}

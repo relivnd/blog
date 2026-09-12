@@ -1,0 +1,147 @@
+/* Responsive adjustments — mobile-last, matching the desktop-first sizing above */
+
+@media (max-width: 48rem) {
+  :root {
+    --gutter: var(--sp-4);
+    --fs-3xl: 1.875rem;
+    --fs-4xl: 2.25rem;
+  }
+
+  .main {
+    padding-top: var(--sp-6);
+  }
+
+  .header__inner {
+    gap: var(--sp-3);
+  }
+
+  .nav {
+    width: 100%;
+    margin-left: 0;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    scrollbar-width: none;
+  }
+
+  .nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav__link {
+    white-space: nowrap;
+  }
+
+  .hero {
+    padding-top: var(--sp-5);
+  }
+
+  .hero__avatar {
+    width: 96px;
+    height: 96px;
+  }
+
+  .talk-meta {
+    grid-template-columns: 1fr;
+    gap: var(--sp-1);
+  }
+
+  .talk-meta__key {
+    margin-top: var(--sp-2);
+  }
+
+  .talk-meta__key:first-child {
+    margin-top: 0;
+  }
+
+  .post-nav {
+    flex-direction: column;
+  }
+
+  .post-nav__link {
+    max-width: 100%;
+  }
+
+  .post-nav__link--next {
+    text-align: left;
+    margin-left: 0;
+  }
+
+  .to-top {
+    right: var(--sp-4);
+    bottom: var(--sp-4);
+  }
+
+  .newsletter {
+    padding: var(--sp-5) var(--sp-4);
+  }
+
+  .search__input {
+    font-size: var(--fs-base);
+    padding: var(--sp-3) var(--sp-4);
+  }
+
+  /* Hide carousel arrows on touch — swiping is the native affordance */
+  .carousel__nav {
+    display: none;
+  }
+
+  .carousel__item {
+    width: 8rem;
+  }
+
+  /* Icon-only nav entries reclaim horizontal space on phones */
+  .visually-hidden-sm {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+
+@media (min-width: 64rem) {
+  .prose figure.wide,
+  .prose img.wide {
+    width: min(var(--wide-width), calc(100vw - 2 * var(--gutter)));
+    margin-inline: calc((var(--content-width) - min(var(--wide-width), 100vw - 2 * var(--gutter))) / 2);
+  }
+}
+
+@media print {
+  .header,
+  .footer,
+  .share,
+  .post-nav,
+  .to-top,
+  .newsletter,
+  .copy-code,
+  .carousel__nav,
+  .map {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  .main {
+    max-width: none;
+    padding: 0;
+  }
+
+  a {
+    color: #000;
+    text-decoration: underline;
+  }
+
+  .prose pre {
+    background: #f4f4f4;
+    border-color: #ccc;
+    white-space: pre-wrap;
+  }
+}

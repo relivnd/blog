@@ -1,0 +1,22 @@
+{{- define "main" -}}
+<header class="page-header">
+  <h1 class="page-header__title">{{ .Title }}</h1>
+  {{- with .Content }}
+  <div class="prose">{{ . }}</div>
+  {{- end }}
+</header>
+
+{{- /* Branch bundles paginate their own pages; taxonomy pages get .Pages too. */ -}}
+{{- $pages := .Pages -}}
+{{- if .IsHome }}{{ $pages = site.RegularPages }}{{ end -}}
+
+{{- if $pages }}
+  {{- $paginator := .Paginate $pages }}
+<div class="entries">
+  {{- range $paginator.Pages }}
+    {{ partial "entry.html" . }}
+  {{- end }}
+</div>
+{{ partial "pagination.html" . }}
+{{- end }}
+{{- end -}}

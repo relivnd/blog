@@ -1,0 +1,67 @@
+{{- /*
+  tag_cloud.html — weighted tag cloud.
+
+  Font size comes from a --w custom property between 0 (rarest tag) and
+  1 (most used); the visual scale itself lives in CSS rather than being
+  hard-coded here. When every tag has the same count, --w is pinned to 0.5
+  so the cloud renders evenly instead of collapsing to the minimum size.
+
+  Params (all optional):
+    limit — cap the number of tags shown, keeping the most used ones.
+
+  Taxonomy API follows the .Alphabetical / .Name / .Count shape, matching
+  what already works in this repo.
+*/ -}}
+
+{{- $limit := int (.limit | default 0) -}}
+{{- $taxonomy := site.Taxonomies.tags -}}
+
+{{- if $taxonomy -}}
+  {{- /* Collect into plain maps so the list can be limited by popularity
+         and then re-sorted alphabetically for display. A cloud sorted by
+         count reads as a leaderboard, which is not what a cloud is for. */ -}}
+  {{- $source := $taxonomy.ByCount -}}
+  {{- if gt $limit 0 }}{{ $source = first $limit $source }}{{ end -}}
+
+  {{- $items := slice -}}
+  {{- $min := 0 -}}
+  {{- $max := 0 -}}
+
+  {{- range $index, $entry := $source -}}
+    {{- $count := $entry.Count -}}
+    {{- if eq $index 0 -}}
+      {{- $min = $count -}}
+      {{- $max = $count -}}
+    {{- else -}}
+      {{- if lt $count $min }}{{ $min = $count }}{{ end -}}
+      {{- if gt $count $max }}{{ $max = $count }}{{ end -}}
+    {{- end -}}
+
+    {{- with site.GetPage (printf "/tags/%s" $entry.Name) -}}
+      {{- $items = $items | append (dict
+        "title" .Title
+        "url" .RelPermalink
+        "count" $count
+        "sortKey" (lower .Title)) -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- $span := sub $max $min -}}
+  {{- $items = sort $items "sortKey" -}}
+
+  {{- with $items }}
+<ul class="tag-cloud">
+    {{- range . }}
+      {{- $w := 0.5 -}}
+      {{- if gt $span 0 -}}
+        {{- $w = div (float (sub .count $min)) (float $span) -}}
+      {{- end }}
+  <li>
+    <a class="tag-cloud__link" style="--w:{{ printf "%.3f" $w }}"
+       href="{{ .url }}"
+       title="{{ i18n "tag_count" .count }}">{{ .title }}</a>
+  </li>
+    {{- end }}
+</ul>
+  {{- end }}
+{{- end }}

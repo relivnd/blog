@@ -1,0 +1,75 @@
+{{- /*
+  icon.html — curated icon set.
+
+  Usage: {{ partial "icon.html" "github" }}
+
+  Only the icons this theme actually uses are included. PaperMod's svg.html
+  is 178KB because it ships every brand under the sun; that entire file
+  lands in the build for a site that needs six brand marks.
+
+  Brand glyphs (linkedin, github, dev, mastodon, email) are the same paths
+  PaperMod uses, so the marks stay recognisable. UI glyphs are Feather-style
+  2px strokes.
+
+  Every icon is aria-hidden: icons here are always paired with a visible
+  label or an aria-label on the parent, never used as the sole accessible
+  name.
+*/ -}}
+
+{{- $name := . | lower -}}
+
+{{- $stroke := `class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"` -}}
+{{- $fill := `class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true" focusable="false"` -}}
+
+{{- if eq $name "linkedin" -}}
+<svg {{ $stroke | safeHTMLAttr }}><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+
+{{- else if eq $name "github" -}}
+<svg {{ $stroke | safeHTMLAttr }}><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+
+{{- else if eq $name "dev" -}}
+<svg {{ $fill | safeHTMLAttr }}><path d="M7.42 10.05c-.18-.16-.46-.23-.84-.23H6l.02 2.44.04 2.45.56-.02c.41 0 .63-.07.83-.26.24-.24.26-.36.26-2.2 0-1.91-.02-1.96-.29-2.18zM0 4.94v14.12h24V4.94H0zM8.56 15.3c-.44.58-1.06.77-2.53.77H4.71V8.53h1.4c1.67 0 2.16.18 2.6.9.27.43.29.6.32 2.57.05 2.23-.02 2.73-.47 3.3zm5.09-5.47h-2.47v1.77h1.52v1.28l-.72.04-.75.03v1.77l1.22.03 1.2.04v1.28h-1.6c-1.53 0-1.6-.01-1.87-.3l-.3-.28v-3.16c0-3.02.01-3.18.25-3.48.23-.31.25-.31 1.88-.31h1.64v1.3zm4.68 5.45c-.17.43-.64.79-1 .79-.18 0-.45-.15-.67-.39-.32-.32-.45-.63-.82-2.08l-.9-3.39-.45-1.67h.76c.4 0 .75.02.75.05 0 .06 1.16 4.54 1.26 4.83.04.15.32-.7.73-2.3l.66-2.52.74-.04c.4-.02.73 0 .73.04 0 .14-1.67 6.38-1.8 6.68z"/></svg>
+
+{{- else if eq $name "mastodon" -}}
+<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21.58 13.913c-.29 1.469-2.592 3.121-5.238 3.396-1.379.184-2.737.368-4.185.276-2.368-.092-4.237-.551-4.237-.551 0 .184.014.459.043.643.308 2.294 2.317 2.478 4.22 2.57 1.922 0 3.633-.46 3.633-.46l.079 1.653s-1.344.734-3.738.918c-1.32.091-2.96-.092-4.869-.551-4.14-1.102-4.853-5.507-4.961-10.005-.034-1.285-.013-2.57-.013-3.58 0-4.589 3-5.966 3-5.966 1.513-.734 4.11-1.01 6.808-1.01h.067c2.699 0 5.296.276 6.81 1.01 0 0 3 1.377 3 5.967 0 0 .037 3.304-.419 5.69"/><path d="M17.832 8.633v5h-1.978V8.78c0-1.023-.43-1.542-1.29-1.542-.95 0-1.427.616-1.427 1.834v2.655H11.17V9.072c0-1.218-.476-1.834-1.427-1.834-.86 0-1.29.52-1.29 1.542v4.852H6.475V8.633c0-1.022.26-1.834.782-2.434.538-.6 1.243-.909 2.118-.909 1.012 0 1.779.39 2.286 1.169l.492.827.493-.827c.507-.78 1.274-1.169 2.286-1.169.875 0 1.58.308 2.118.909.522.6.782 1.412.782 2.434" fill="currentColor" stroke="none"/></svg>
+
+{{- else if or (eq $name "email") (eq $name "mail") -}}
+<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+
+{{- else if eq $name "rss" -}}
+<svg {{ $stroke | safeHTMLAttr }}><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+
+{{- else if eq $name "search" -}}
+<svg {{ $stroke | safeHTMLAttr }}><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+
+{{- else if eq $name "calendar" -}}
+<svg {{ $stroke | safeHTMLAttr }}><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+
+{{- else if eq $name "clock" -}}
+<svg {{ $stroke | safeHTMLAttr }}><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+
+{{- else if eq $name "pin" -}}
+<svg {{ $stroke | safeHTMLAttr }}><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+
+{{- else if eq $name "mic" -}}
+<svg {{ $stroke | safeHTMLAttr }}><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1M12 18v4M8 22h8"/></svg>
+
+{{- else if eq $name "tag" -}}
+<svg {{ $stroke | safeHTMLAttr }}><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><circle cx="7" cy="7" r="1.5"/></svg>
+
+{{- else if eq $name "external" -}}
+<svg {{ $stroke | safeHTMLAttr }}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6M10 14 21 3"/></svg>
+
+{{- else if eq $name "arrow-up" -}}
+<svg {{ $stroke | safeHTMLAttr }}><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+
+{{- else if eq $name "chevron-left" -}}
+<svg {{ $stroke | safeHTMLAttr }}><path d="m15 18-6-6 6-6"/></svg>
+
+{{- else if eq $name "chevron-right" -}}
+<svg {{ $stroke | safeHTMLAttr }}><path d="m9 18 6-6-6-6"/></svg>
+
+{{- else if eq $name "play" -}}
+<svg {{ $fill | safeHTMLAttr }}><path d="M8 5.14v14.72a1 1 0 0 0 1.5.86l11.2-7.36a1 1 0 0 0 0-1.72L9.5 4.28A1 1 0 0 0 8 5.14z"/></svg>
+
+{{- end -}}

@@ -1,0 +1,10 @@
+{{- /*
+  render-link.html — external links open in a new tab with rel="noopener".
+
+  Internal links, anchors and mailto: are left alone so in-page navigation
+  behaves normally.
+*/ -}}
+{{- $url := .Destination -}}
+{{- $external := and (strings.HasPrefix $url "http") (not (strings.HasPrefix $url (site.BaseURL | strings.TrimSuffix "/"))) -}}
+<a href="{{ $url | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}
+  {{- if $external }} target="_blank" rel="noopener"{{ end }}>{{ .Text }}</a>

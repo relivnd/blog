@@ -1,0 +1,13 @@
+name = "eu-central-2"
+license = "MIT"
+licenselink = "https://github.com/relivnd/blog/blob/main/themes/eu-central-2/LICENSE"
+description = "Dark-only Hugo theme for eu-central-2.ch. Posts, talks with maps, tools, fuzzy search, tag cloud."
+homepage = "https://eu-central-2.ch/"
+demosite = "https://eu-central-2.ch/"
+tags = ["blog", "dark", "personal", "minimal", "search"]
+features = ["dark-only", "fuzzy-search", "tag-cloud", "leaflet-maps", "carousel", "linkedin-share"]
+min_version = "0.158.0"
+
+[author]
+  name = "Tobias (relivnd)"
+  homepage = "https://eu-central-2.ch/"

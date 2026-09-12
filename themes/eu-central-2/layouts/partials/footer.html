@@ -1,0 +1,32 @@
+<footer class="footer">
+  <div class="footer__inner">
+    <p class="footer__copy">
+      &copy; {{ now.Format "2006" }}
+      <a href="{{ "/" | relURL }}">{{ site.Title }}</a>
+      {{- with site.Params.author.name }} · {{ . }}{{ end }}
+    </p>
+
+    {{- /* Separators are drawn by CSS between list items, so an absent RSS
+           feed cannot leave a stray leading "·" behind. */ -}}
+    <ul class="footer__links">
+      <li><a href="{{ "/search/" | relURL }}">{{ i18n "search" }}</a></li>
+      {{- range .AlternativeOutputFormats }}
+        {{- if eq .Name "rss" }}
+      <li>
+        <a href="{{ .Permalink }}">{{ partial "icon.html" "rss" }}<span>RSS</span></a>
+      </li>
+        {{- end }}
+      {{- end }}
+      <li>
+        {{ i18n "built_with" }}
+        <a href="https://gohugo.io/" rel="noopener">Hugo</a>
+        &amp;
+        <a href="https://kiro.dev" rel="noopener">Kiro</a>
+      </li>
+    </ul>
+  </div>
+</footer>
+
+<button class="to-top" type="button" aria-label="{{ i18n "back_to_top" }}">
+  {{- partial "icon.html" "arrow-up" }}
+</button>

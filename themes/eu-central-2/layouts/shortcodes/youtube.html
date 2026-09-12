@@ -1,0 +1,18 @@
+{{- /*
+  youtube — privacy-preserving embed.
+
+  Usage:
+    {{< youtube "https://www.youtube.com/watch?v=P_3qzmZ3_8M" >}}
+    {{< youtube id="P_3qzmZ3_8M" title="My talk" >}}
+*/ -}}
+{{- $url := "" -}}
+{{- if .IsNamedParams -}}
+  {{- $url = or (.Get "url") (.Get "id") -}}
+{{- else -}}
+  {{- $url = .Get 0 -}}
+{{- end -}}
+{{- with $url -}}
+  {{- partial "video.html" (dict
+    "url" .
+    "title" (or ($.Get "title") $.Page.Title)) -}}
+{{- end -}}

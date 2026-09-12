@@ -1,0 +1,64 @@
+{{- /*
+  render-image.html — responsive images from page bundle resources.
+
+  Bundle-relative images get resized into a WebP srcset at build time.
+  Remote and absolute paths are passed through untouched, so nothing breaks
+  for images that live in static/.
+
+  Alt text comes from .PlainText, not .Text: .Text is already-rendered HTML
+  (calling markdownify on it recurses), and an alt attribute cannot contain
+  markup anyway.
+
+  Captions come from the markdown *title*, not the alt text:
+
+      ![alt text](photo.png "A visible caption")
+
+  Reusing alt text as a caption would make screen readers announce the same
+  sentence twice, once as the image description and once as body text. An
+  image with no title renders as a bare <img> with no <figure> wrapper.
+*/ -}}
+{{- $src := .Destination -}}
+{{- $alt := .PlainText -}}
+{{- $caption := .Title -}}
+{{- $remote := or (strings.HasPrefix $src "http") (strings.HasPrefix $src "//") (strings.HasPrefix $src "/") -}}
+
+{{- $res := "" -}}
+{{- if not $remote -}}
+  {{- with .Page.Resources.GetMatch $src }}{{ $res = . }}{{ end -}}
+{{- end -}}
+
+{{- $processable := false -}}
+{{- with $res -}}
+  {{- if in (slice "image/png" "image/jpeg" "image/webp") .MediaType.Type }}{{ $processable = true }}{{ end -}}
+{{- end -}}
+
+{{- if $caption }}<figure>{{ end -}}
+
+{{- if $processable -}}
+  {{- /* Cap at 1400px: the content column is 46rem, so anything wider is
+         only useful for high-DPI displays. Resize always needs an explicit
+         dimension, so the "no downscale" branch restates the native width
+         rather than passing format options alone. */ -}}
+  {{- $max := 1400 -}}
+  {{- $target := $res.Width -}}
+  {{- if gt $res.Width $max }}{{ $target = $max }}{{ end -}}
+  {{- $base := $res.Resize (printf "%dx webp q85" $target) -}}
+
+  {{- $srcset := slice -}}
+  {{- range slice 480 768 1024 1400 -}}
+    {{- if le . $res.Width -}}
+      {{- with $res.Resize (printf "%dx webp q85" .) -}}
+        {{- $srcset = $srcset | append (printf "%s %dw" .RelPermalink .Width) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+<img src="{{ $base.RelPermalink }}"
+     {{ with $srcset }}srcset="{{ delimit . ", " }}" sizes="(min-width: 48rem) 46rem, 100vw"{{ end }}
+     width="{{ $base.Width }}" height="{{ $base.Height }}"
+     alt="{{ $alt }}" loading="lazy" decoding="async">
+{{- else -}}
+<img src="{{ $src | safeURL }}" alt="{{ $alt }}" loading="lazy" decoding="async">
+{{- end -}}
+
+{{- with $caption }}<figcaption>{{ . }}</figcaption>{{ end -}}
+{{- if $caption }}</figure>{{ end -}}

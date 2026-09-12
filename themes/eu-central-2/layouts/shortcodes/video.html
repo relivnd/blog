@@ -1,0 +1,33 @@
+{{- /*
+  video — self-hosted video from a page bundle resource or a URL.
+
+  Usage:
+    {{< video src="demo.mp4" poster="demo-poster.png" caption="A demo" >}}
+
+  No autoplay: controls only, muted attribute omitted so the browser's own
+  policy applies. preload="metadata" keeps the initial page weight down.
+*/ -}}
+{{- $src := or (.Get "src") (.Get 0) -}}
+{{- $poster := .Get "poster" -}}
+{{- $caption := .Get "caption" -}}
+
+{{- $srcURL := $src -}}
+{{- with .Page.Resources.GetMatch $src }}{{ $srcURL = .RelPermalink }}{{ end -}}
+{{- $posterURL := "" -}}
+{{- with $poster -}}
+  {{- $posterURL = . -}}
+  {{- with $.Page.Resources.GetMatch . }}{{ $posterURL = .RelPermalink }}{{ end -}}
+{{- end -}}
+
+{{- with $srcURL }}
+<figure class="video">
+  <div class="video__frame">
+    <video controls preload="metadata"{{ with $posterURL }} poster="{{ . }}"{{ end }}>
+      <source src="{{ . }}">
+      Your browser does not support embedded video.
+      <a href="{{ . }}">Download the file</a> instead.
+    </video>
+  </div>
+  {{- with $caption }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
+</figure>
+{{- end }}

@@ -1,0 +1,7 @@
+{{- /*
+  rawhtml — escape hatch for markup Goldmark would otherwise strip.
+
+  Usage:
+    {{< rawhtml >}}<abbr title="Infrastructure as Code">IaC</abbr>{{< /rawhtml >}}
+*/ -}}
+{{ .Inner | safeHTML }}

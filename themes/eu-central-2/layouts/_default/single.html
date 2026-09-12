@@ -1,0 +1,61 @@
+{{- define "main" -}}
+{{ partial "breadcrumbs.html" . }}
+
+<article>
+  <header class="page-header">
+    <h1 class="page-header__title">{{ .Title }}</h1>
+    {{ partial "post_meta.html" . }}
+    {{- with .Params.tags }}
+    <div style="margin-top: var(--sp-4)">{{ partial "tags.html" $ }}</div>
+    {{- end }}
+  </header>
+
+  {{- /* Lead cover image, when the bundle provides one. */ -}}
+  {{- $cover := "" -}}
+  {{- with .Params.cover -}}
+    {{- with $.Resources.GetMatch (printf "*%s*" .) }}{{ $cover = . }}{{ end -}}
+  {{- else -}}
+    {{- with .Resources.GetMatch "{cover,feature,thumbnail}.{png,jpg,jpeg,webp}" }}{{ $cover = . }}{{ end -}}
+  {{- end -}}
+  {{- with $cover }}
+    {{- with .Resize "1400x webp q85" }}
+  <img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}"
+       alt="" style="border-radius: var(--radius-lg); margin-bottom: var(--sp-6)"
+       loading="eager" decoding="async">
+    {{- end }}
+  {{- end }}
+
+  {{ partial "toc.html" . }}
+
+  <div class="prose">
+    {{ .Content }}
+  </div>
+
+  {{ partial "share.html" . }}
+</article>
+
+{{- /* Prev/next within the same section only. site.RegularPages is newest
+       first, so index+1 is the older neighbour. Both lookups are bounds
+       checked: `index` errors on an out-of-range index rather than
+       returning nil. */ -}}
+{{- $siblings := where site.RegularPages "Section" .Section -}}
+{{- $total := len $siblings -}}
+{{- $prev := "" -}}
+{{- $next := "" -}}
+{{- range $i, $p := $siblings -}}
+  {{- if eq $p.RelPermalink $.RelPermalink -}}
+    {{- if lt (add $i 1) $total }}{{ $prev = index $siblings (add $i 1) }}{{ end -}}
+    {{- if gt $i 0 }}{{ $next = index $siblings (sub $i 1) }}{{ end -}}
+  {{- end -}}
+{{- end -}}
+{{- if or $prev $next }}
+<nav class="post-nav" aria-label="More in {{ .Section }}">
+  {{- with $prev }}
+  <a class="post-nav__link" href="{{ .RelPermalink }}" rel="prev">&larr; {{ .Title }}</a>
+  {{- end }}
+  {{- with $next }}
+  <a class="post-nav__link post-nav__link--next" href="{{ .RelPermalink }}" rel="next">{{ .Title }} &rarr;</a>
+  {{- end }}
+</nav>
+{{- end }}
+{{- end -}}

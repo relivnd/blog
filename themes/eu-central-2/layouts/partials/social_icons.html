@@ -1,0 +1,11 @@
+{{- /* social_icons.html — homepage social row. Reads site.Params.socialIcons. */ -}}
+{{- with site.Params.socialIcons }}
+<div class="socials">
+  {{- range . }}
+  <a class="socials__link" href="{{ .url }}" aria-label="{{ .name | title }}"
+     {{- if not (strings.HasPrefix .url "mailto:") }} rel="me noopener" target="_blank"{{ end }}>
+    {{- partial "icon.html" .name }}
+  </a>
+  {{- end }}
+</div>
+{{- end }}

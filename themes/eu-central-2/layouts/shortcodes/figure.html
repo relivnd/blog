@@ -1,0 +1,27 @@
+{{- /*
+  figure — image with a caption, resized from a bundle resource when possible.
+
+  Usage:
+    {{< figure src="diagram.png" alt="Request flow" caption="How it flows" wide="true" >}}
+*/ -}}
+{{- $src := or (.Get "src") (.Get 0) -}}
+{{- $alt := .Get "alt" | default "" -}}
+{{- $caption := .Get "caption" -}}
+{{- $link := .Get "link" -}}
+{{- $wide := .Get "wide" -}}
+
+{{- $res := .Page.Resources.GetMatch $src -}}
+
+<figure{{ if $wide }} class="wide"{{ end }}>
+  {{- with $link }}<a href="{{ . }}"{{ if strings.HasPrefix . "http" }} rel="noopener" target="_blank"{{ end }}>{{ end }}
+  {{- if $res }}
+    {{- $img := $res -}}
+    {{- if gt $res.Width 1400 }}{{ $img = $res.Resize "1400x webp q85" }}{{ end }}
+  <img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}"
+       alt="{{ $alt }}" loading="lazy" decoding="async">
+  {{- else }}
+  <img src="{{ $src | safeURL }}" alt="{{ $alt }}" loading="lazy" decoding="async">
+  {{- end }}
+  {{- with $link }}</a>{{ end }}
+  {{- with $caption }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
+</figure>

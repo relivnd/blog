@@ -1,0 +1,8 @@
+{{- /* tags.html — tag pill list for a single page. */ -}}
+{{- with .Params.tags }}
+<ul class="tags">
+  {{- range . }}
+  <li><a class="tag" href="{{ (printf "/tags/%s/" (. | urlize)) | relURL }}">{{ . }}</a></li>
+  {{- end }}
+</ul>
+{{- end }}

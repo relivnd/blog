@@ -1,0 +1,42 @@
+{{- /*
+  entry.html — list card for a post, talk or tool.
+
+  One partial for all three sections so list pages stay consistent. Section
+  specific detail (event name for talks, category for tools) is appended to
+  the meta row when present.
+*/ -}}
+{{- $page := . -}}
+<a class="entry" href="{{ .RelPermalink }}">
+  {{- /* Cover image, if the bundle has one. No post currently sets one, so
+         this must degrade to nothing rather than reserving space. */ -}}
+  {{- $cover := "" -}}
+  {{- with .Params.cover -}}
+    {{- with $page.Resources.GetMatch (printf "*%s*" .) }}{{ $cover = . }}{{ end -}}
+  {{- else -}}
+    {{- with .Resources.GetMatch "{cover,feature,thumbnail}.{png,jpg,jpeg,webp}" }}{{ $cover = . }}{{ end -}}
+  {{- end -}}
+  {{- with $cover }}
+    {{- with .Resize "720x360 webp q82 Center" }}
+  <img class="entry__cover" src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}"
+       alt="" loading="lazy" decoding="async">
+    {{- end }}
+  {{- end }}
+
+  <h3 class="entry__title">{{ .Title }}</h3>
+
+  {{- with .Params.summary | default .Summary }}
+  <p class="entry__summary">{{ . | plainify | htmlUnescape }}</p>
+  {{- end }}
+
+  <div class="entry__meta">
+    {{- with .Date }}
+    <time datetime="{{ .Format "2006-01-02" }}">{{ .Format (site.Params.dateFormat | default "2 January 2006") }}</time>
+    {{- end }}
+    {{- with .Params.event }}<span>{{ . }}</span>{{ end }}
+    {{- with .Params.location }}<span>{{ . }}</span>{{ end }}
+    {{- with .Params.category }}<span>{{ . }}</span>{{ end }}
+    {{- if and .WordCount (ne site.Params.showReadingTime false) }}
+    <span>{{ i18n "reading_time" .ReadingTime }}</span>
+    {{- end }}
+  </div>
+</a>
