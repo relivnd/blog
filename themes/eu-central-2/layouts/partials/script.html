@@ -1,0 +1,17 @@
+{{- /*
+  script.html — emit a fingerprinted, minified <script> for a theme asset.
+
+  Usage: {{ partial "script.html" "js/app.js" }}
+
+  Deliberately no js.Build / esbuild: the CI workflow installs plain Hugo
+  (peaceiris/actions-hugo without extended), so the build must not depend on
+  esbuild, Sass, or PostCSS. Every script here is hand-written ES5-compatible
+  code that needs no transpilation.
+*/ -}}
+{{- with resources.Get . -}}
+  {{- $js := . -}}
+  {{- if hugo.IsProduction -}}
+    {{- $js = $js | minify | fingerprint "sha256" -}}
+  {{- end -}}
+  <script src="{{ $js.RelPermalink }}"{{ with $js.Data.Integrity }} integrity="{{ . }}"{{ end }} defer></script>
+{{- end -}}

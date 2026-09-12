@@ -1,0 +1,15 @@
+{{- /*
+  toc.html — collapsible table of contents.
+
+  Rendered only when the page opts in (showToc) and Hugo actually produced
+  a ToC, so short posts without headings never show an empty box.
+*/ -}}
+{{- $show := site.Params.showToc | default false -}}
+{{- if isset .Params "showtoc" }}{{ $show = .Params.showToc }}{{ end -}}
+
+{{- if and $show .TableOfContents (ne (trim .TableOfContents " \n") "<nav id=\"TableOfContents\"></nav>") }}
+<details class="toc"{{ if .Params.tocOpen | default site.Params.tocOpen }} open{{ end }}>
+  <summary>{{ i18n "toc_heading" }}</summary>
+  {{ .TableOfContents }}
+</details>
+{{- end }}

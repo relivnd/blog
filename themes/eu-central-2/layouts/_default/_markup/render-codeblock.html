@@ -1,0 +1,12 @@
+{{- /*
+  render-codeblock.html — wraps fenced code blocks so js/app.js can attach a
+  copy button, and routes highlighting through transform.Highlight so the
+  Chroma classes in assets/css/chroma.css apply.
+
+  Fence attributes still work, e.g.
+
+      ```go {linenos=true,hl_lines=[2,3]}
+*/ -}}
+<div class="code-block"{{ with .Type }} data-lang="{{ . }}"{{ end }}>
+  {{- transform.Highlight (trim .Inner "\n") .Type .Options -}}
+</div>

@@ -1,0 +1,55 @@
+{{- /*
+  tools/list.html — tools grouped by their `category` front matter field,
+  preserving the "## Coding" grouping the old single page used.
+
+  Category order follows params.toolCategories when set, so the ordering is
+  editorial rather than alphabetical; anything not listed there is appended.
+*/ -}}
+{{- define "main" -}}
+<header class="page-header">
+  <h1 class="page-header__title">{{ .Title }}</h1>
+  {{- with .Content }}
+  <div class="prose">{{ . }}</div>
+  {{- end }}
+</header>
+
+{{- $pages := .Pages -}}
+{{- $groups := $pages.GroupByParam "category" -}}
+
+{{- /* Build the display order. */ -}}
+{{- $preferred := site.Params.toolCategories | default slice -}}
+{{- $ordered := slice -}}
+{{- range $preferred -}}
+  {{- $want := . -}}
+  {{- range $groups -}}
+    {{- if eq .Key $want }}{{ $ordered = $ordered | append . }}{{ end -}}
+  {{- end -}}
+{{- end -}}
+{{- range $groups -}}
+  {{- if not (in $preferred .Key) }}{{ $ordered = $ordered | append . }}{{ end -}}
+{{- end -}}
+
+{{- range $ordered }}
+<section class="tool-group" aria-labelledby="cat-{{ .Key | urlize }}">
+  <div class="section__head">
+    <h2 class="section__title" id="cat-{{ .Key | urlize }}">{{ .Key | default (i18n "uncategorised") }}</h2>
+  </div>
+  <div class="tool-grid">
+    {{- range .Pages }}
+      {{- $tool := . }}
+    <a class="tool-card" href="{{ .RelPermalink }}">
+      {{- with .Params.logo }}
+        {{- $logo := . | relURL -}}
+        {{- with $tool.Resources.GetMatch . }}{{ $logo = .RelPermalink }}{{ end }}
+      <img class="tool-card__logo" src="{{ $logo }}" alt="" loading="lazy" decoding="async">
+      {{- end }}
+      <h3 class="tool-card__name">{{ .Title }}</h3>
+      {{- with .Params.summary | default .Summary }}
+      <p class="tool-card__summary">{{ . | plainify | htmlUnescape | truncate 160 }}</p>
+      {{- end }}
+    </a>
+    {{- end }}
+  </div>
+</section>
+{{- end }}
+{{- end -}}

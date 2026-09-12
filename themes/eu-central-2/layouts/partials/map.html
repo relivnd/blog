@@ -1,0 +1,58 @@
+{{- /*
+  map.html — Leaflet map for a talk location.
+
+  Params: (dict "lat" .. "lon" .. "label" .. "zoom" ..)
+
+  Renders only the container plus a no-JS fallback link; js/map.js loads
+  Leaflet lazily when the element scrolls into view.
+
+  Asset resolution prefers a vendored copy so the page has no third-party
+  runtime dependency:
+
+      themes/eu-central-2/assets/vendor/leaflet/leaflet.css
+      themes/eu-central-2/assets/vendor/leaflet/leaflet.js
+
+  If those are absent it falls back to a pinned CDN build, configurable via
+  params.leaflet.cssURL / params.leaflet.jsURL. Vendoring is recommended:
+  the CDN fallback ships without a Subresource Integrity hash, because the
+  hash cannot be computed without fetching the file.
+*/ -}}
+
+{{- $lat := .lat -}}
+{{- $lon := .lon -}}
+{{- $label := .label | default "" -}}
+{{- $zoom := .zoom | default 15 -}}
+
+{{- if and $lat $lon }}
+  {{- $leaflet := site.Params.leaflet | default dict -}}
+  {{- $cssURL := $leaflet.cssURL | default "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" -}}
+  {{- $jsURL := $leaflet.jsURL | default "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" -}}
+
+  {{- with resources.Get "vendor/leaflet/leaflet.css" -}}
+    {{- $cssURL = .RelPermalink -}}
+  {{- end -}}
+  {{- with resources.Get "vendor/leaflet/leaflet.js" -}}
+    {{- $js := . -}}
+    {{- if hugo.IsProduction }}{{ $js = $js | minify | fingerprint "sha256" }}{{ end -}}
+    {{- $jsURL = $js.RelPermalink -}}
+  {{- end }}
+
+<div class="map">
+  <div class="map__canvas"
+       data-map
+       data-lat="{{ $lat }}"
+       data-lon="{{ $lon }}"
+       data-zoom="{{ $zoom }}"
+       data-label="{{ $label }}"
+       data-leaflet-css="{{ $cssURL }}"
+       data-leaflet-js="{{ $jsURL }}"
+       role="img"
+       aria-label="{{ i18n "talk_location" }}{{ with $label }}: {{ . }}{{ end }}">
+    {{- /* Shown until Leaflet initialises, and permanently without JS. */ -}}
+    <p class="map__fallback">
+      <a href="https://www.openstreetmap.org/?mlat={{ $lat }}&amp;mlon={{ $lon }}#map={{ $zoom }}/{{ $lat }}/{{ $lon }}"
+         rel="noopener" target="_blank">{{ i18n "talk_map_note" }}</a>
+    </p>
+  </div>
+</div>
+{{- end }}

@@ -1,0 +1,66 @@
+{{- /*
+  video.html — privacy-preserving YouTube embed.
+
+  Params: (dict "url" "<any youtube url or bare id>" "title" "<label>")
+
+  Nothing is requested from Google on page load. The poster frame is fetched
+  at *build* time via resources.GetRemote and re-served from this origin, so
+  even the thumbnail does not leak a visitor request. The nocookie iframe is
+  only injected after a click, by js/app.js.
+
+  If the poster fetch fails (offline build, deleted video), the facade falls
+  back to a plain play button on a dark surface. A failed thumbnail must
+  never fail the build.
+*/ -}}
+
+{{- $url := .url -}}
+{{- $title := .title | default "YouTube video" -}}
+
+{{- /* Accept watch?v=, youtu.be/, /embed/, or a bare ID. */ -}}
+{{- $id := $url -}}
+{{- if strings.Contains $url "youtu.be/" -}}
+  {{- $id = index (split (index (split $url "youtu.be/") 1) "?") 0 -}}
+{{- else if strings.Contains $url "/embed/" -}}
+  {{- $id = index (split (index (split $url "/embed/") 1) "?") 0 -}}
+{{- else if strings.Contains $url "v=" -}}
+  {{- $id = index (split (index (split $url "v=") 1) "&") 0 -}}
+{{- end -}}
+{{- $id = trim $id "/ " -}}
+
+{{- if $id }}
+  {{- $embed := printf "https://www.youtube-nocookie.com/embed/%s?autoplay=1&rel=0" $id -}}
+
+  {{- /* maxresdefault does not exist for every upload; hqdefault always does.
+
+         `try` is required here: Resource.Err was removed in Hugo 0.141 and a
+         404 from i.ytimg.com must stay a warning, never a build failure. */ -}}
+  {{- $poster := "" -}}
+  {{- range slice "maxresdefault" "hqdefault" -}}
+    {{- if not $poster -}}
+      {{- with try (resources.GetRemote (printf "https://i.ytimg.com/vi/%s/%s.jpg" $id .)) -}}
+        {{- with .Err -}}
+          {{- warnf "video.html: could not fetch YouTube poster for %s: %s" $id . -}}
+        {{- else with .Value -}}
+          {{- with .Resize "960x webp q80" -}}
+            {{- $poster = .RelPermalink -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end }}
+
+<div class="video">
+  <div class="video__frame">
+    <button class="video__facade" type="button"
+            data-embed="{{ $embed }}"
+            data-video-title="{{ $title }}"
+            aria-label="{{ i18n "video_load" }}: {{ $title }}">
+      {{- with $poster }}
+      <img class="video__poster" src="{{ . }}" alt="" loading="lazy" decoding="async">
+      {{- end }}
+      <span class="video__play">{{ partial "icon.html" "play" }}</span>
+    </button>
+  </div>
+  <p class="video__note">{{ i18n "video_privacy" }}</p>
+</div>
+{{- end }}

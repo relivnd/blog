@@ -1,0 +1,11 @@
+{{- /*
+  render-heading.html — adds a hover anchor to h2-h6.
+
+  h1 is the page title and never appears in body content, so it is skipped.
+*/ -}}
+<h{{ .Level }} id="{{ .Anchor }}">
+  {{- .Text -}}
+  {{- if ge .Level 2 }}
+  <a class="heading-anchor" href="#{{ .Anchor }}" aria-label="Permalink to this section">#</a>
+  {{- end }}
+</h{{ .Level }}>

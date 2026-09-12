@@ -1,8 +1,7 @@
 ---
-title: "Search" # in any language you want
-layout: "search" # necessary for search
+title: "Search"
+layout: "search" # required — selects layouts/_default/search.html
 url: "/search"
-# description: "Description for Search"
-summary: "search"
-placeholder: "placeholder text in search input box"
+summary: "Fuzzy search across posts, talks and tools."
+placeholder: "Search posts, talks and tools…"
 ---

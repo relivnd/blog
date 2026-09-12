@@ -1,0 +1,15 @@
+{{- /*
+  gallery — responsive grid of images.
+
+  Wrap ordinary markdown images; each is still processed by the image render
+  hook, so srcset and lazy loading are inherited.
+
+  Usage:
+    {{< gallery >}}
+    ![First](one.png)
+    ![Second](two.png)
+    {{< /gallery >}}
+*/ -}}
+<div class="gallery" data-columns="{{ .Get "columns" | default "2" }}">
+  {{ .Inner | markdownify }}
+</div>

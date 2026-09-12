@@ -1,0 +1,17 @@
+{{- /*
+  terms.html — taxonomy index (/tags/).
+
+  Renders the tag cloud rather than a flat list, which is what the homepage
+  links to as "All topics".
+*/ -}}
+{{- define "main" -}}
+<header class="page-header">
+  <h1 class="page-header__title">{{ .Title | default (i18n "all_tags") }}</h1>
+  {{- with .Content }}
+  <div class="prose">{{ . }}</div>
+  {{- end }}
+  <p class="page-header__summary">{{ i18n "browse_tags" }}</p>
+</header>
+
+{{ partial "tag_cloud.html" (dict) }}
+{{- end -}}

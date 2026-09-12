@@ -1,0 +1,23 @@
+{{- /* post_meta.html — date, reading time, and (for talks) event context. */ -}}
+<div class="meta">
+  {{- with .Date }}
+  <span class="meta__item">
+    {{- partial "icon.html" "calendar" }}
+    <time datetime="{{ .Format "2006-01-02" }}">{{ .Format (site.Params.dateFormat | default "2 January 2006") }}</time>
+  </span>
+  {{- end }}
+
+  {{- if and .WordCount (ne site.Params.showReadingTime false) }}
+  <span class="meta__item">
+    {{- partial "icon.html" "clock" }}
+    <span>{{ i18n "reading_time" .ReadingTime }}</span>
+  </span>
+  {{- end }}
+
+  {{- with .Params.event }}
+  <span class="meta__item">
+    {{- partial "icon.html" "mic" }}
+    <span>{{ . }}</span>
+  </span>
+  {{- end }}
+</div>

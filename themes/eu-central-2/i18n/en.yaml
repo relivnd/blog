@@ -1,0 +1,65 @@
+# UI strings. Override per-site by copying this file to i18n/en.yaml at the
+# project root.
+
+skip_to_content: "Skip to content"
+back_to_top: "Back to top"
+built_with: "Built with"
+menu: "Menu"
+
+read_more: "Read more"
+reading_time:
+  one: "{{ .Count }} min read"
+  other: "{{ .Count }} min read"
+words:
+  one: "{{ .Count }} word"
+  other: "{{ .Count }} words"
+
+toc_heading: "Table of contents"
+prev_page: "Previous"
+next_page: "Next"
+page_of: "Page {{ .current }} of {{ .total }}"
+
+share_on: "Share"
+share_linkedin: "Share on LinkedIn"
+
+tags: "Tags"
+all_tags: "All topics"
+browse_tags: "Browse by topic"
+tag_count:
+  one: "{{ .Count }} entry"
+  other: "{{ .Count }} entries"
+
+recent_posts: "Recent posts"
+all_posts: "All posts"
+
+talks: "Talks"
+talk_event: "Event"
+talk_date: "Date"
+talk_location: "Location"
+talk_watch: "Watch the recording"
+talk_map_note: "Location shown on OpenStreetMap"
+
+tools: "Tools"
+tool_visit: "Visit"
+uncategorised: "Other"
+
+certifications: "Certifications"
+certifications_hint: "Scroll or use the arrows to browse"
+carousel_prev: "Previous certifications"
+carousel_next: "Next certifications"
+
+newsletter_title: "Newsletter"
+newsletter_text: "Occasional notes on AWS, containers and cloud engineering. No spam, unsubscribe any time."
+newsletter_cta: "Subscribe"
+newsletter_unconfigured: "The newsletter form is not configured yet."
+
+search: "Search"
+search_placeholder: "Search posts, talks and tools\u2026"
+search_hint: "Fuzzy matching \u2014 partial words and typos are fine."
+
+video_load: "Load video"
+video_privacy: "Loads from youtube-nocookie.com when you click play."
+
+not_found_title: "Page not found"
+not_found_text: "That page does not exist. Try the search, or head back to the homepage."
+go_home: "Go to homepage"

@@ -1,0 +1,29 @@
+{{- /*
+  index.json — the search index.
+
+  Covers posts, talks and tools. `section` is emitted so results can show a
+  badge and so the matcher can weight it. Body text is truncated: the index
+  is downloaded by every visitor who opens /search, and full article text
+  would dominate the payload for little ranking benefit.
+*/ -}}
+{{- $sections := site.Params.searchSections | default (slice "posts" "talks" "tools") -}}
+{{- $limit := int (site.Params.searchContentChars | default 1200) -}}
+
+{{- $index := slice -}}
+{{- range site.RegularPages -}}
+  {{- if in $sections .Section -}}
+    {{- $summary := "" -}}
+    {{- with .Params.summary }}{{ $summary = . }}{{ else }}{{ $summary = .Summary }}{{ end -}}
+
+    {{- $index = $index | append (dict
+      "title" .Title
+      "permalink" .RelPermalink
+      "section" (.CurrentSection.Title | default .Section)
+      "summary" ($summary | plainify | htmlUnescape | chomp)
+      "content" (.Plain | htmlUnescape | chomp | truncate $limit "")
+      "tags" (.Params.tags | default slice)
+      "date" (.Date.Format "2006-01-02")
+    ) -}}
+  {{- end -}}
+{{- end -}}
+{{- $index | jsonify -}}

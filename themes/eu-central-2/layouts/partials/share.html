@@ -1,0 +1,24 @@
+{{- /*
+  share.html — LinkedIn share for any single page.
+
+  LinkedIn's share-offsite endpoint takes a single url parameter and reads
+  the title/description/image from the page's Open Graph tags, which
+  partials/seo.html always emits. Disable per-site with
+  params.showShareButtons = false, or per-page with `share: false`.
+*/ -}}
+{{- $enabled := true -}}
+{{- if eq site.Params.showShareButtons false }}{{ $enabled = false }}{{ end -}}
+{{- if eq .Params.share false }}{{ $enabled = false }}{{ end -}}
+
+{{- if $enabled }}
+<div class="share">
+  <span class="share__label">{{ i18n "share_on" }}</span>
+  <a class="share__link"
+     href="https://www.linkedin.com/sharing/share-offsite/?url={{ .Permalink | urlquery }}"
+     target="_blank" rel="noopener"
+     aria-label="{{ i18n "share_linkedin" }}">
+    {{- partial "icon.html" "linkedin" }}
+    <span>LinkedIn</span>
+  </a>
+</div>
+{{- end }}

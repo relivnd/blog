@@ -1,0 +1,11 @@
+{{- define "main" -}}
+<div class="notfound">
+  <p class="notfound__code">404</p>
+  <h1>{{ i18n "not_found_title" }}</h1>
+  <p class="hero__subtitle" style="margin-inline: auto">{{ i18n "not_found_text" }}</p>
+  <div class="hero__buttons">
+    <a class="btn btn--primary" href="{{ "/" | relURL }}">{{ i18n "go_home" }}</a>
+    <a class="btn" href="{{ "/search/" | relURL }}">{{ i18n "search" }}</a>
+  </div>
+</div>
+{{- end -}}

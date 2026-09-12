@@ -1,0 +1,14 @@
+{{- /* breadcrumbs.html — Home / Section / Page */ -}}
+{{- if and .IsPage (ne site.Params.showBreadcrumbs false) }}
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="{{ "/" | relURL }}">{{ site.Title }}</a></li>
+    {{- with .CurrentSection }}
+      {{- if and .Title (ne .RelPermalink "/") }}
+    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+      {{- end }}
+    {{- end }}
+    <li aria-current="page">{{ .Title }}</li>
+  </ol>
+</nav>
+{{- end }}

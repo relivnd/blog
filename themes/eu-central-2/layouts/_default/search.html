@@ -1,0 +1,39 @@
+{{- define "main" -}}
+<header class="page-header">
+  <h1 class="page-header__title">{{ .Title }}</h1>
+  {{- with .Content }}
+  <div class="prose">{{ . }}</div>
+  {{- end }}
+</header>
+
+{{- /* data-search-index points at the JSON output of the home page, which
+       config.yaml already emits. */ -}}
+<div data-search-root data-search-index="{{ "/index.json" | relURL }}">
+  <div class="search__form">
+    <label class="visually-hidden" for="search-input">{{ i18n "search" }}</label>
+    <input class="search__input"
+           id="search-input"
+           type="search"
+           autocomplete="off"
+           autocapitalize="off"
+           spellcheck="false"
+           role="combobox"
+           aria-expanded="true"
+           aria-controls="search-results"
+           aria-autocomplete="list"
+           placeholder="{{ .Params.placeholder | default (i18n "search_placeholder") }}"
+           data-search-input>
+  </div>
+
+  <p class="search__status" data-search-status role="status" aria-live="polite"></p>
+
+  <ul class="search__results" id="search-results" role="listbox"
+      aria-label="{{ i18n "search" }}" data-search-results></ul>
+
+  <p class="newsletter__unconfigured">{{ i18n "search_hint" }}</p>
+</div>
+{{- end -}}
+
+{{- define "scripts" -}}
+{{ partial "script.html" "js/search.js" }}
+{{- end -}}

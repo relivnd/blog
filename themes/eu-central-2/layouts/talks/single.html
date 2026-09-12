@@ -1,0 +1,44 @@
+{{- define "main" -}}
+{{ partial "breadcrumbs.html" . }}
+
+<article>
+  <header class="page-header">
+    <h1 class="page-header__title">{{ .Title }}</h1>
+    {{- with .Params.summary }}
+    <p class="page-header__summary">{{ . }}</p>
+    {{- end }}
+  </header>
+
+  {{ partial "talk_meta.html" . }}
+
+  {{- /* Recording, when one exists. */ -}}
+  {{- with .Params.youtube }}
+    {{ partial "video.html" (dict "url" . "title" $.Title) }}
+  {{- end }}
+
+  <div class="prose">
+    {{ .Content }}
+  </div>
+
+  {{- /* Venue map, only when coordinates were supplied. */ -}}
+  {{- if and .Params.lat .Params.lon }}
+    {{ partial "map.html" (dict
+      "lat" .Params.lat
+      "lon" .Params.lon
+      "label" (.Params.location | default .Params.event)
+      "zoom" (.Params.zoom | default 16)) }}
+  {{- end }}
+
+  {{- with .Params.tags }}
+  <div style="margin-top: var(--sp-6)">{{ partial "tags.html" $ }}</div>
+  {{- end }}
+
+  {{ partial "share.html" . }}
+</article>
+{{- end -}}
+
+{{- define "scripts" -}}
+{{- if and .Params.lat .Params.lon }}
+{{ partial "script.html" "js/map.js" }}
+{{- end }}
+{{- end -}}

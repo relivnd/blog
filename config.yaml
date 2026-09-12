@@ -1,35 +1,81 @@
 baseURL: "https://eu-central-2.ch/"
-languageCode: "en-us"
+# `locale` replaced `languageCode` in Hugo 0.158.
+locale: "en-us"
 title: "eu-central-2"
-theme: "hugo-PaperMod"
+theme: "eu-central-2"
+
 enableInlineShortcodes: true
 enableRobotsTXT: true
+enableEmoji: true
 buildDrafts: false
 buildFuture: false
 buildExpired: false
-enableEmoji: true
+
+# Hugo >= 0.128 key. On older Hugo this is `paginate: 10`.
+pagination:
+  pagerSize: 10
+
+taxonomies:
+  tag: tags
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON # search index (layouts/_default/index.json)
+
+markup:
+  goldmark:
+    renderer:
+      # Required by the rawhtml shortcode and inline HTML in existing posts.
+      unsafe: true
+  highlight:
+    # noClasses: false makes Chroma emit classes instead of inline styles, so
+    # assets/css/chroma.css controls the palette.
+    noClasses: false
+    codeFences: true
+    guessSyntax: false
+    lineNos: false
+    tabWidth: 4
+  tableOfContents:
+    startLevel: 2
+    endLevel: 4
+
 params:
+  description: "Notes on AWS, containers, Kubernetes and cloud engineering from Zürich."
+  dateFormat: "2 January 2006"
+
+  showReadingTime: true
+  showBreadcrumbs: true
+  showShareButtons: true
+  showToc: true
+  tocOpen: false
+
+  homePostLimit: 5
+  homeTagLimit: 24
+
   author:
     name: "relivnd"
-  profileMode:
-    enabled: true
-    title: "Welcome to eu-central-2" # optional default will be site title
+
+  # ---- Homepage hero -------------------------------------------------
+  profile:
+    image: "images/relivnd_logo.png"
+    title: "Welcome to eu-central-2"
     subtitle: "I'm Tobi. A Cloud Consultant from eu-central-2 (Zürich). This is the place where I write about AWS, Cloud Computing, DevOps and everything else. Currently I work @ copebit AG"
-    imageWidth: 120 # custom size
-    imageHeight: 120 # custom size
     buttons:
-      - name: Blog
-        url: "/posts"
-      - name: About Me
-        url: "/aboutme"
-      - name: Tools
-        url: "/tools"
-      - name: Talks
-        url: "/talks"
-      - name: copebit AG
+      - name: "Blog"
+        url: "/posts/"
+      - name: "About Me"
+        url: "/aboutme/"
+      - name: "Tools"
+        url: "/tools/"
+      - name: "Talks"
+        url: "/talks/"
+      - name: "copebit AG"
         url: "https://www.copebit.ch/en/home/"
 
-  socialIcons: # optional
+  # Icon names must exist in layouts/partials/icon.html.
+  socialIcons:
     - name: "linkedin"
       url: "https://www.linkedin.com/in/relivnd/"
     - name: "github"
@@ -41,14 +87,54 @@ params:
     - name: "email"
       url: "mailto:hej@relivnd.dev"
 
-  ShowShareButtons: true
-  ShareButtons: ["linkedin"] # To customize which share buttons to be enabled on page
+  # ---- Tools ---------------------------------------------------------
+  # Editorial order for the grouped /tools page. Categories not listed are
+  # appended in Hugo's default order.
+  toolCategories:
+    - "Coding"
 
-  ShowReadingTime: true
-  ShowBreadCrumbs: true
+  # ---- Search --------------------------------------------------------
+  searchSections:
+    - "posts"
+    - "talks"
+    - "tools"
+  searchContentChars: 1200
 
-outputs:
-  home:
-    - HTML
-    - RSS
-    - JSON # necessary for search
+  # ---- Newsletter (MailerLite) ---------------------------------------
+  # accountId enables the universal snippet site-wide; formId places the
+  # embedded form. Both come from MailerLite's embed code:
+  #   ml('account', 'ACCOUNT_ID')  and  data-form="FORM_ID"
+  # Left blank on purpose: with no accountId the theme ships zero
+  # third-party JS, and the newsletter section renders a placeholder.
+  mailerlite:
+    accountId: ""
+    formId: ""
+    # Optional fallback while the embed is unconfigured: a hosted MailerLite
+    # landing page URL for the button to link to.
+    signupURL: ""
+
+  # ---- Maps ----------------------------------------------------------
+  # Used only when a talk has lat/lon. Overridden automatically if
+  # themes/eu-central-2/assets/vendor/leaflet/leaflet.{css,js} exist, which is
+  # the recommended setup — see the theme README.
+  leaflet:
+    cssURL: "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    jsURL: "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+
+menus:
+  main:
+    - name: "Blog"
+      url: "/posts/"
+      weight: 10
+    - name: "Talks"
+      url: "/talks/"
+      weight: 20
+    - name: "Tools"
+      url: "/tools/"
+      weight: 30
+    - name: "About"
+      url: "/aboutme/"
+      weight: 40
+    - name: "Topics"
+      url: "/tags/"
+      weight: 50

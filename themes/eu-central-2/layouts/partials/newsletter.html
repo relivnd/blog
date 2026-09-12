@@ -1,0 +1,30 @@
+{{- /*
+  newsletter.html — MailerLite embedded form.
+
+  The universal snippet in head.html registers the account; this partial only
+  places the target div MailerLite hydrates. When formId is unset the section
+  renders a quiet placeholder instead of an empty box, so the homepage layout
+  is not left with a hole during setup.
+
+  Dark-palette overrides for MailerLite's injected markup live in
+  assets/css/components.css, scoped under .newsletter.
+*/ -}}
+{{- $ml := site.Params.mailerlite | default dict -}}
+
+<section class="newsletter" id="newsletter" aria-labelledby="newsletter-title">
+  <h2 class="newsletter__title" id="newsletter-title">{{ i18n "newsletter_title" }}</h2>
+  <p class="newsletter__text">{{ site.Params.newsletterText | default (i18n "newsletter_text") }}</p>
+
+  {{- with $ml.formId }}
+  <div class="newsletter__embed">
+    <div class="ml-embedded" data-form="{{ . }}"></div>
+  </div>
+  {{- else }}
+  <p class="newsletter__unconfigured">
+    {{ i18n "newsletter_unconfigured" }}
+    {{- with $ml.signupURL }}
+    <a class="btn btn--primary" href="{{ . }}" rel="noopener" target="_blank">{{ i18n "newsletter_cta" }}</a>
+    {{- end }}
+  </p>
+  {{- end }}
+</section>

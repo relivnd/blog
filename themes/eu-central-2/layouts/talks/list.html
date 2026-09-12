@@ -1,0 +1,17 @@
+{{- define "main" -}}
+<header class="page-header">
+  <h1 class="page-header__title">{{ .Title }}</h1>
+  {{- with .Content }}
+  <div class="prose">{{ . }}</div>
+  {{- end }}
+</header>
+
+{{- /* Newest first: a talks page is a reverse-chronological record. */ -}}
+{{- with .Pages.ByDate.Reverse }}
+<div class="entries">
+  {{- range . }}
+    {{ partial "entry.html" . }}
+  {{- end }}
+</div>
+{{- end }}
+{{- end -}}

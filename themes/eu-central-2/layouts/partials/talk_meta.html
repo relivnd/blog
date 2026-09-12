@@ -1,0 +1,27 @@
+{{- /*
+  talk_meta.html — event / date / location block for a talk.
+
+  Replaces the two-column markdown table the old single talks page used.
+  Each row is omitted when its front matter field is missing, so a talk
+  without a known venue simply shows fewer rows.
+*/ -}}
+{{- if or .Params.event .Params.location .Date }}
+<dl class="talk-meta">
+  {{- with .Params.event }}
+  <dt class="talk-meta__key">{{ i18n "talk_event" }}</dt>
+  <dd class="talk-meta__val">{{ . }}</dd>
+  {{- end }}
+
+  {{- with .Date }}
+  <dt class="talk-meta__key">{{ i18n "talk_date" }}</dt>
+  <dd class="talk-meta__val">
+    <time datetime="{{ .Format "2006-01-02" }}">{{ .Format (site.Params.dateFormat | default "2 January 2006") }}</time>
+  </dd>
+  {{- end }}
+
+  {{- with .Params.location }}
+  <dt class="talk-meta__key">{{ i18n "talk_location" }}</dt>
+  <dd class="talk-meta__val">{{ . }}</dd>
+  {{- end }}
+</dl>
+{{- end }}
