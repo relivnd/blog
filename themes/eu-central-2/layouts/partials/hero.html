@@ -1,7 +1,7 @@
 {{- /*
   hero.html — homepage hero.
 
-  Reads params.profile (logo, title, subtitle, buttons), falling back to the
+  Reads params.profile (title, subtitle, buttons), falling back to the
   site title. Buttons come straight from config so the five existing entries
   carry over unchanged; a Newsletter button is appended automatically when
   MailerLite is configured, and is styled as the single primary CTA.
@@ -9,16 +9,6 @@
 {{- $profile := site.Params.profile | default dict -}}
 
 <section class="hero">
-  {{- $logo := $profile.image | default "images/relivnd_logo.png" -}}
-  {{- with resources.Get $logo }}
-    {{- /* Fit, not Resize: Resize with both dimensions would distort a
-           non-square logo. */ -}}
-    {{- with .Fit "240x240 webp" }}
-  <img class="hero__avatar" src="{{ .RelPermalink }}" width="120" height="120"
-       alt="{{ site.Title }}" loading="eager" decoding="async" fetchpriority="high">
-    {{- end }}
-  {{- end }}
-
   <h1 class="hero__title">{{ $profile.title | default site.Title }}</h1>
 
   {{- with $profile.subtitle }}

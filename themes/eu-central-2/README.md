@@ -12,22 +12,51 @@ because the deploy workflow installs standard Hugo via `peaceiris/actions-hugo`.
 
 ## Colour system
 
-The palette is four accents on `#474448`. Their roles are fixed by measured
-contrast, not taste — see the header comment in `assets/css/tokens.css`.
+Three colours: background `#383838`, text `#FFFFFF`, one accent `#F71735`.
+Everything else is a neutral grey or an alpha tint of those. Contrast figures
+are in the header comment of `assets/css/tokens.css`.
 
 | Token | Value | Contrast on bg | Role |
 |---|---|---|---|
-| `--accent` | `#EC0B43` | **2.0:1** | Fills only. Never text on the background. White on it is 4.6:1, which passes AA. |
-| `--accent-link` | `#7AE7C7` | 6.1:1 | Links, interactive text |
-| `--accent-soft` | `#D6FFB7` | 8.1:1 | Hover states, secondary decoration |
-| `--accent-mark` | `#FFF689` | 8.2:1 | Blockquote rule, search match marks |
+| `--bg` | `#383838` | — | Page background (`--bg-sunken`/`--bg-code` `#2e2e2e`, `--bg-raised` `#444444`) |
+| `--text` | `#FFFFFF` | 11.7:1 | Body text **and links** |
+| `--text-muted` / `--text-faint` | `#C2C2C2` / `#A3A3A3` | 6.6:1 / 4.6:1 | Secondary text |
+| `--accent` | `#F71735` | **2.9:1** | Fills, rules, borders, underlines. Never text. |
+| `--accent-hover` | `#D40F2C` | — | Hover fill; white on it is 5.4:1 |
+| `--accent-highlight` | accent @ 38% | — | `<mark>` and search matches, white text on it 9:1 |
 
-House rule: one accent per component, accents on small or interactive
-elements only. The single primary CTA (`.btn--primary`) is the one place an
-accent is a large filled area.
+House rule: accents on small or decorative elements only. The single primary
+CTA (`.btn--primary`) is the one place the accent is a large filled area.
+Links are white; in prose they carry a red underline, elsewhere hover adds a
+red underline or border. Focus rings are white because the accent is under
+the 3:1 minimum for focus indicators. Code highlighting uses `#FB7F90`, a
+lighter tint of the accent, because the accent itself is unreadable as text.
 
-`#EC0B43` as body text on `#474448` fails WCAG AA badly. If you need red text,
-lighten it or put it on a white fill.
+---
+
+## Typography
+
+| Token | Family | Weights | Used for |
+|---|---|---|---|
+| `--font-display` | Sansation (alias of `--font-sans`) | 700 | `h1`–`h6`, `.brand`, `.hero__title`, `.entry__title`, `.tool-card__name`, `.search__result-title` |
+| `--font-sans` | Sansation | 300 / 400 / 700 (+ italics) | Body and UI text |
+| `--font-mono` | system monospace stack | — | Code |
+
+Both are **self-hosted** TTF files in `static/fonts/`, the official
+downloads from Google Fonts (SIL OFL 1.1, licence and copyrights in
+`static/fonts/OFL.txt`). The `@font-face` rules live in
+`assets/css/fonts.css`, first in the CSS concatenation. `partials/head.html`
+preloads only `Sansation-Regular.ttf` and `Sansation-Bold.ttf`. Nothing is
+requested from Google at runtime. Never add the Google Fonts `<link>`.
+
+Use only weights that ship: Sansation has 300, 400 and 700. Anything in
+`--font-display` is `font-weight: 700`. `font-synthesis:
+none` is set on `:root`, so a wrong weight falls back to a real face instead
+of a faked bold.
+
+To refresh the files, download the families from fonts.google.com, drop the
+`static/*.ttf` files into `static/fonts/` and keep the file names used in
+`fonts.css`.
 
 ---
 
@@ -41,7 +70,7 @@ title: "Post title"
 date: '2025-11-15T00:00:00+01:00'
 summary: "Shown in list cards, search results and meta description."
 tags: ["AWS", "Kubernetes"]
-showToc: true        # optional, defaults to params.showToc
+showToc: true        # optional opt-in, site default params.showToc is false
 cover: "cover.png"   # optional, bundle-relative
 share: false         # optional, hides the LinkedIn button
 ---
@@ -162,9 +191,8 @@ All under `params:` in `config.yaml`.
 | `showReadingTime` | `true` | Reading time in meta rows |
 | `showBreadcrumbs` | `true` | Breadcrumbs on single pages |
 | `showShareButtons` | `true` | LinkedIn share button |
-| `showToc` / `tocOpen` | `true` / `false` | Table of contents default and initial state |
-| `homePostLimit` | `5` | Recent posts on the homepage |
-| `homeTagLimit` | `24` | Tags in the homepage cloud |
+| `showToc` / `tocOpen` | `false` / `false` | Table of contents default and initial state |
+| `homeTagLimit` | `24` | Tags in the cloud at the end of /posts |
 | `profile.*` | — | Hero logo, title, subtitle, buttons |
 | `socialIcons[]` | — | `name` must exist in `partials/icon.html` |
 | `toolCategories[]` | — | Editorial order for `/tools` groups |
@@ -326,7 +354,7 @@ layouts/
       render-link.html       external links get target=_blank rel=noopener
       render-heading.html    hover anchors on h2-h6
       render-codeblock.html  wraps fences in .code-block for the copy button
-  index.html             homepage: hero, posts, carousel, cloud, newsletter
+  index.html             homepage: hero only
   404.html
   talks/{list,single}.html
   tools/{list,single}.html
@@ -341,5 +369,5 @@ assets/
 ```
 
 JavaScript is loaded per page, not globally: `app.js` everywhere (copy
-buttons, back-to-top, video facades), `carousel.js` on the homepage,
+buttons, back-to-top, video facades), `carousel.js` on pages with `certifications: true`,
 `map.js` only on talks with coordinates, `search.js` only on `/search`.

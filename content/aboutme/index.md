@@ -1,5 +1,6 @@
 ---
 title: "About Me"
+certifications: true
 summary: "search"
 placeholder: "placeholder text in search input box"
 ---

@@ -48,10 +48,9 @@ params:
   showReadingTime: true
   showBreadcrumbs: true
   showShareButtons: true
-  showToc: true
+  showToc: false
   tocOpen: false
 
-  homePostLimit: 5
   homeTagLimit: 24
 
   author:
@@ -59,7 +58,6 @@ params:
 
   # ---- Homepage hero -------------------------------------------------
   profile:
-    image: "images/relivnd_logo.png"
     title: "Welcome to eu-central-2"
     subtitle: "I'm Tobi. A Cloud Consultant from eu-central-2 (Zürich). This is the place where I write about AWS, Cloud Computing, DevOps and everything else. Currently I work @ copebit AG"
     buttons:
@@ -121,17 +119,3 @@ params:
     cssURL: "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     jsURL: "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
 
-menus:
-  main:
-    - name: "Blog"
-      url: "/posts/"
-      weight: 10
-    - name: "Talks"
-      url: "/talks/"
-      weight: 20
-    - name: "Tools"
-      url: "/tools/"
-      weight: 30
-    - name: "About"
-      url: "/aboutme/"
-      weight: 40

@@ -8,7 +8,7 @@
 
   {{- partial "header.html" . }}
 
-  <main id="main" class="main{{ if or .IsHome (eq .Section "tools") }} main--wide{{ end }}">
+  <main id="main" class="main{{ if or .IsHome (eq .Section "tools") }} main--wide{{ end }}{{ if .IsHome }} main--home{{ end }}">
     {{- block "main" . }}{{ end }}
   </main>
 

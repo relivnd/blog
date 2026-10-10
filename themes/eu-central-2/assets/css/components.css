@@ -12,7 +12,7 @@
   background: transparent;
   color: var(--text);
   font-size: var(--fs-sm);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.4;
   text-decoration: none;
   transition: border-color var(--dur-fast) var(--ease),
@@ -21,8 +21,8 @@
 
 .btn:hover {
   text-decoration: none;
-  border-color: var(--accent-soft);
-  color: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--text);
 }
 
 /* The one place an accent is allowed to be a large filled area. */
@@ -54,8 +54,9 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  background: var(--bg-overlay);
-  border-bottom: 1px solid var(--border);
+  /* Page colour at 92% so the header blends in at rest and only the blur
+     shows when content scrolls under it. */
+  background: rgba(56, 56, 56, 0.92);
   backdrop-filter: saturate(160%) blur(10px);
   -webkit-backdrop-filter: saturate(160%) blur(10px);
 }
@@ -76,23 +77,19 @@
   align-items: center;
   gap: var(--sp-2);
   color: var(--text);
+  font-family: var(--font-display);
   font-weight: 700;
-  font-size: var(--fs-base);
-  letter-spacing: -0.02em;
+  font-size: var(--fs-xl);
+  letter-spacing: -0.01em;
   text-decoration: none;
   white-space: nowrap;
 }
 
 .brand:hover {
-  text-decoration: none;
-  color: var(--accent-soft);
-}
-
-.brand__mark {
-  width: 26px;
-  height: 26px;
-  border-radius: var(--radius-sm);
-  flex: 0 0 auto;
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
 }
 
 .nav {
@@ -111,7 +108,7 @@
   border-radius: var(--radius-sm);
   color: var(--text-muted);
   font-size: var(--fs-sm);
-  font-weight: 550;
+  font-weight: 400;
   text-decoration: none;
   transition: color var(--dur-fast) var(--ease),
     background var(--dur-fast) var(--ease);
@@ -158,7 +155,7 @@
 }
 
 .footer a:hover {
-  color: var(--accent-link);
+  color: var(--text);
 }
 
 .footer__copy {
@@ -210,7 +207,7 @@
   display: grid;
   place-items: center;
   border: 1px solid var(--border-strong);
-  border-radius: 50%;
+  border-radius: var(--radius);
   background: var(--bg-overlay);
   color: var(--text-muted);
   opacity: 0;
@@ -224,8 +221,8 @@
 }
 
 .to-top:hover {
-  color: var(--accent-soft);
-  border-color: var(--accent-soft);
+  color: var(--text);
+  border-color: var(--accent);
 }
 
 .to-top svg {
@@ -244,16 +241,21 @@
   gap: var(--sp-4);
 }
 
-.hero__avatar {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: var(--bg-sunken);
-  padding: var(--sp-2);
-  border: 1px solid var(--border);
+/* Homepage is the hero alone, centred in the viewport between header
+   and footer. */
+.main--home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.main--home .hero {
+  padding-block: var(--sp-6);
 }
 
 .hero__title {
+  font-family: var(--font-display);
+  font-weight: 700;
   font-size: var(--fs-3xl);
   margin: 0;
 }
@@ -287,14 +289,14 @@
   place-items: center;
   width: 40px;
   height: 40px;
-  border-radius: 50%;
+  border-radius: var(--radius);
   color: var(--text-muted);
   transition: color var(--dur-fast) var(--ease),
     background var(--dur-fast) var(--ease);
 }
 
 .socials__link:hover {
-  color: var(--accent-soft);
+  color: var(--text);
   background: var(--bg-raised);
 }
 
@@ -303,7 +305,7 @@
   height: 24px;
 }
 
-/* ==== Sections on the homepage ======================================== */
+/* ==== Page sections (certifications, tag cloud) ======================= */
 
 .section {
   margin-top: var(--sp-8);
@@ -326,7 +328,7 @@
 
 .section__more {
   font-size: var(--fs-sm);
-  font-weight: 600;
+  font-weight: 700;
   white-space: nowrap;
 }
 
@@ -357,7 +359,10 @@
 }
 
 .entry:hover .entry__title {
-  color: var(--accent-soft);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
 }
 
 .entry__cover {
@@ -368,6 +373,8 @@
 }
 
 .entry__title {
+  font-family: var(--font-display);
+  font-weight: 700;
   font-size: var(--fs-lg);
   margin: 0 0 var(--sp-2);
   color: var(--text);
@@ -477,14 +484,14 @@
 
 .toc > summary {
   cursor: pointer;
-  font-weight: 650;
+  font-weight: 700;
   font-size: var(--fs-base);
   color: var(--text);
   list-style-position: outside;
 }
 
 .toc > summary::marker {
-  color: var(--accent-link);
+  color: var(--accent);
 }
 
 .toc nav {
@@ -510,7 +517,7 @@
 }
 
 .toc a:hover {
-  color: var(--accent-link);
+  color: var(--text);
 }
 
 /* ==== Tags ============================================================ */
@@ -532,7 +539,7 @@
   background: var(--bg-sunken);
   color: var(--text-muted);
   font-size: var(--fs-xs);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.01em;
   text-decoration: none;
   transition: color var(--dur-fast) var(--ease),
@@ -541,8 +548,8 @@
 
 .tag:hover {
   text-decoration: none;
-  color: var(--accent-soft);
-  border-color: var(--accent-soft);
+  color: var(--text);
+  border-color: var(--accent);
 }
 
 .tag__count {
@@ -564,7 +571,7 @@
 
 .tag-cloud__link {
   color: var(--text-muted);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.3;
   text-decoration: none;
   /* --w is set inline per tag: 0 (rarest) .. 1 (most used) */
@@ -574,8 +581,10 @@
 }
 
 .tag-cloud__link:hover {
-  text-decoration: none;
-  color: var(--accent-soft);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+  color: var(--text);
   opacity: 1;
 }
 
@@ -604,15 +613,15 @@
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-pill);
   font-size: var(--fs-sm);
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text);
   text-decoration: none;
 }
 
 .share__link:hover {
   text-decoration: none;
-  color: var(--accent-soft);
-  border-color: var(--accent-soft);
+  color: var(--text);
+  border-color: var(--accent);
 }
 
 .share__link svg {
@@ -638,7 +647,7 @@
 }
 
 .post-nav__link:hover {
-  color: var(--accent-link);
+  color: var(--text);
 }
 
 .post-nav__link--next {
@@ -676,7 +685,7 @@
 
 .talk-meta__key {
   color: var(--text-faint);
-  font-weight: 650;
+  font-weight: 700;
   white-space: nowrap;
 }
 
@@ -724,8 +733,8 @@
 }
 
 .map__canvas .leaflet-bar a:hover {
-  background: var(--bg);
-  color: var(--accent-soft);
+  background: var(--accent);
+  color: var(--accent-ink);
 }
 
 .map__canvas .leaflet-control-attribution {
@@ -735,7 +744,7 @@
 }
 
 .map__canvas .leaflet-control-attribution a {
-  color: var(--accent-link);
+  color: var(--text);
 }
 
 .map__canvas .leaflet-popup-content-wrapper,
@@ -805,7 +814,7 @@
   place-items: center;
   width: 64px;
   height: 64px;
-  border-radius: 50%;
+  border-radius: var(--radius);
   background: var(--accent);
   color: var(--accent-ink);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
@@ -862,7 +871,10 @@
 }
 
 .tool-card:hover .tool-card__name {
-  color: var(--accent-soft);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
 }
 
 .tool-card__logo {
@@ -872,8 +884,9 @@
 }
 
 .tool-card__name {
+  font-family: var(--font-display);
   font-size: var(--fs-base);
-  font-weight: 650;
+  font-weight: 700;
   margin: 0;
   transition: color var(--dur-fast) var(--ease);
 }
@@ -888,7 +901,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--sp-2);
-  font-weight: 600;
+  font-weight: 700;
   font-size: var(--fs-sm);
 }
 
@@ -967,7 +980,7 @@ a.carousel__item:hover {
   display: grid;
   place-items: center;
   border: 1px solid var(--border-strong);
-  border-radius: 50%;
+  border-radius: var(--radius);
   color: var(--text-muted);
   background: var(--bg-sunken);
   transition: color var(--dur-fast) var(--ease),
@@ -975,8 +988,8 @@ a.carousel__item:hover {
 }
 
 .carousel__btn:hover:not(:disabled) {
-  color: var(--accent-soft);
-  border-color: var(--accent-soft);
+  color: var(--text);
+  border-color: var(--accent);
 }
 
 .carousel__btn:disabled {
@@ -1072,7 +1085,7 @@ a.carousel__item:hover {
   border-radius: var(--radius-pill) !important;
   color: var(--accent-ink) !important;
   font-family: var(--font-sans) !important;
-  font-weight: 600 !important;
+  font-weight: 700 !important;
   padding: var(--sp-3) var(--sp-5) !important;
 }
 
@@ -1104,7 +1117,7 @@ a.carousel__item:hover {
 }
 
 .search__input:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--text);
   outline-offset: 1px;
   border-color: transparent;
 }
@@ -1138,12 +1151,13 @@ a.carousel__item:hover {
 .search__result a:hover,
 .search__result[aria-selected="true"] a {
   text-decoration: none;
-  border-color: var(--accent-soft);
+  border-color: var(--accent);
 }
 
 .search__result-title {
+  font-family: var(--font-display);
   font-size: var(--fs-base);
-  font-weight: 650;
+  font-weight: 700;
   margin: 0 0 var(--sp-1);
 }
 
@@ -1164,15 +1178,16 @@ a.carousel__item:hover {
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-pill);
   font-size: var(--fs-xs);
-  font-weight: 600;
+  font-family: var(--font-sans);
+  font-weight: 700;
   color: var(--text-faint);
   vertical-align: 0.1em;
 }
 
 .search__results mark {
-  background: var(--accent-mark);
-  color: #1c1a1d;
-  border-radius: 2px;
+  background: var(--accent-highlight);
+  color: var(--text);
+  border-radius: var(--radius-sm);
   padding: 0 0.1em;
 }
 
@@ -1238,12 +1253,14 @@ a.carousel__item:hover {
   margin-top: 0;
 }
 
+/* One accent only, so note/tip/warning step up through the greys and
+   danger alone gets red. */
 .notice--tip {
-  border-left-color: var(--accent-soft);
+  border-left-color: var(--text-faint);
 }
 
 .notice--warning {
-  border-left-color: var(--accent-mark);
+  border-left-color: var(--text);
 }
 
 /* Danger is the one callout that earns the primary accent. */

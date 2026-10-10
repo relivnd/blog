@@ -114,8 +114,21 @@ assert_contains "footer links list present"     "index.html" 'class="footer__lin
 # without the .icon class stretches to fill its container (see the reset's
 # svg { max-width: 100% }). This caught a full-width footer RSS icon once.
 assert_contains "icons carry sizing class"      "index.html" '<svg class="icon"'
-assert_contains "dark theme-color set"          "index.html" '#474448'
+assert_contains "dark theme-color set"          "index.html" '#383838'
 assert_absent   "no light-mode toggle"          "index.html" 'theme-toggle'
+
+echo
+echo "==> Self-hosted fonts and sharp corners"
+assert_file     "body font shipped"             "fonts/Sansation-Regular.ttf"
+assert_file     "heading font shipped"          "fonts/Sansation-Bold.ttf"
+assert_file     "font licence shipped"          "fonts/OFL.txt"
+assert_contains "body font preloaded"           "index.html" 'href="/fonts/Sansation-Regular.ttf"'
+assert_contains "heading font preloaded"        "index.html" 'href="/fonts/Sansation-Bold.ttf"'
+assert_absent   "no Google Fonts stylesheet"    "index.html" 'fonts.googleapis'
+assert_absent   "no Google Fonts files"         "index.html" 'fonts.gstatic'
+assert_tree_contains "@font-face emitted"       "css" '@font-face'
+assert_tree_contains "display font token"       "css" '--font-display:var(--font-sans)'
+assert_tree_contains "square corner token"      "css" '--radius:0'
 
 echo
 echo "==> Prose and code highlighting (task 3)"
@@ -140,7 +153,8 @@ echo
 echo "==> Tag cloud (task 6)"
 assert_contains "cloud on tags page"            "tags/index.html" 'class="tag-cloud"'
 assert_contains "cloud weights emitted"         "tags/index.html" '--w:'
-assert_contains "cloud on homepage"             "index.html" 'class="tag-cloud"'
+assert_contains "cloud on blog page"            "posts/index.html" 'class="tag-cloud"'
+assert_absent   "no cloud on homepage"          "index.html" 'class="tag-cloud"'
 
 echo
 echo "==> Talks (tasks 7 & 8)"
@@ -173,17 +187,21 @@ echo
 echo "==> Homepage composition (task 11)"
 assert_contains "hero rendered"                 "index.html" 'class="hero"'
 assert_contains "social icons rendered"         "index.html" 'class="socials"'
-assert_contains "recent posts rendered"         "index.html" 'class="entry"'
-assert_contains "carousel rendered"             "index.html" 'data-carousel-root'
-assert_contains "carousel script loaded"        "index.html" 'js/carousel'
+assert_absent   "no recent posts on homepage"   "index.html" 'class="entry"'
+assert_absent   "no top menu"                   "index.html" 'class="nav"'
+assert_tree_contains "post cards on /posts"     "posts" 'class="entry"'
+assert_contains "carousel rendered"             "aboutme/index.html" 'data-carousel-root'
+assert_contains "carousel script loaded"        "aboutme/index.html" 'js/carousel'
+assert_absent   "no carousel on homepage"       "index.html" 'data-carousel-root'
+assert_absent   "carousel script not on home"   "index.html" 'js/carousel'
 assert_absent   "newsletter section removed"    "index.html" 'id="newsletter"'
-assert_contains "badges have alt text"          "index.html" 'alt="AWS Certified Solutions Architect'
+assert_contains "badges have alt text"          "aboutme/index.html" 'alt="AWS Certified Solutions Architect'
 
 echo
 echo "==> Accessibility invariants (task 13)"
 assert_contains "html lang set"                 "index.html" '<html lang='
 assert_contains "icons hidden from AT"          "index.html" 'aria-hidden="true"'
-assert_contains "carousel track is focusable"   "index.html" 'tabindex="0"'
+assert_contains "carousel track is focusable"   "aboutme/index.html" 'tabindex="0"'
 
 echo
 echo "==> Production build (what CI runs)"

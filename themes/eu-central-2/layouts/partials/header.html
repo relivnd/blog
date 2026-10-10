@@ -1,40 +1,5 @@
 <header class="header">
   <div class="header__inner">
-    <a class="brand" href="{{ "/" | relURL }}">
-      {{- with resources.Get "images/relivnd_logo.png" }}
-        {{- with .Fit "52x52 webp" }}
-      <img class="brand__mark" src="{{ .RelPermalink }}" width="26" height="26" alt="" loading="eager" decoding="async">
-        {{- end }}
-      {{- end }}
-      <span>{{ site.Title }}</span>
-    </a>
-
-    <nav class="nav" aria-label="{{ i18n "menu" }}">
-      {{- $current := . }}
-      {{- range site.Menus.main }}
-        {{- /* Mark the section the reader is in. Comparing section names
-               rather than URLs so /posts/some-post/ still lights up Blog. */ -}}
-        {{- $active := false }}
-        {{- with .Page }}
-          {{- if and $current.Section .Section (eq $current.Section .Section) }}{{ $active = true }}{{ end }}
-        {{- else }}
-          {{- $trimmed := strings.TrimSuffix "/" (strings.TrimPrefix "/" .URL) }}
-          {{- if and $trimmed (eq $current.Section $trimmed) }}{{ $active = true }}{{ end }}
-        {{- end }}
-        {{- if $current.IsHome }}{{ $active = false }}{{ end }}
-      <a class="nav__link" href="{{ .URL | relURL }}"
-         {{- if $active }} aria-current="page"{{ end }}
-         {{- if strings.HasPrefix .URL "http" }} rel="noopener"{{ end }}>
-        {{- with .Pre }}{{ partial "icon.html" . }}{{ end }}
-        <span>{{ .Name }}</span>
-      </a>
-      {{- end }}
-
-      <a class="nav__link" href="{{ "/search/" | relURL }}" aria-label="{{ i18n "search" }}"
-         {{- if eq .Layout "search" }} aria-current="page"{{ end }}>
-        {{- partial "icon.html" "search" }}
-        <span class="visually-hidden-sm">{{ i18n "search" }}</span>
-      </a>
-    </nav>
+    <a class="brand" href="{{ "/" | relURL }}">{{ site.Title }}</a>
   </div>
 </header>

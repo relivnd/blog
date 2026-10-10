@@ -58,4 +58,20 @@
   {{- end }}
 </nav>
 {{- end }}
+
+{{- /* Opt-in via front matter `certifications: true` (the About Me page). */ -}}
+{{- if and .Params.certifications hugo.Data.certifications }}
+<section class="section" aria-labelledby="certs">
+  <div class="section__head">
+    <h2 class="section__title" id="certs">{{ i18n "certifications" }}</h2>
+  </div>
+  {{ partial "certifications.html" . }}
+</section>
+{{- end }}
+{{- end -}}
+
+{{- define "scripts" -}}
+{{- if and .Params.certifications hugo.Data.certifications }}
+{{ partial "script.html" "js/carousel.js" }}
+{{- end }}
 {{- end -}}

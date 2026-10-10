@@ -35,11 +35,6 @@
     padding-top: var(--sp-5);
   }
 
-  .hero__avatar {
-    width: 96px;
-    height: 96px;
-  }
-
   .talk-meta {
     grid-template-columns: 1fr;
     gap: var(--sp-1);

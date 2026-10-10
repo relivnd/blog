@@ -1,11 +1,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#474448">
+<meta name="theme-color" content="#383838">
 <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
 
-{{- /* Stylesheet: one concatenated file. Order matters — tokens first,
-       media queries last. */ -}}
+{{- /* Self-hosted fonts (static/fonts/, SIL OFL 1.1). Preload only the two
+       faces every page renders above the fold: body text and headings.
+       crossorigin is required even same-origin, or the preload is wasted. */}}
+<link rel="preload" href="{{ "fonts/Sansation-Regular.ttf" | relURL }}" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="{{ "fonts/Sansation-Bold.ttf" | relURL }}" as="font" type="font/ttf" crossorigin>
+
+{{- /* Stylesheet: one concatenated file. Order matters — @font-face, then
+       tokens, media queries last. */ -}}
 {{- $files := slice
+  "css/fonts.css"
   "css/tokens.css"
   "css/reset.css"
   "css/base.css"
