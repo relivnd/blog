@@ -4,5 +4,5 @@ draft = true
 title = '{{ replace .File.ContentBaseName "-" " " | title }}'
 summary = ''
 tags = []
-showToc = true
+showToc = false
 +++

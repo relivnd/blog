@@ -3,56 +3,62 @@
  *
  * Dark only. There is no light variant and no theme toggle.
  *
- * ACCENT ROLES ARE FIXED BY MEASURED CONTRAST against --bg (#474448,
- * relative luminance 0.063). Do not repurpose them:
+ * THREE COLOURS: background #383838, text #FFFFFF, one accent #F71735.
+ * Everything else is a neutral grey step or an alpha tint of those.
  *
- *   #EC0B43  2.0:1 on bg  -> FAILS as text. Fills only.
- *                            White on #EC0B43 is 4.6:1 -> AA for body text.
- *   #7AE7C7  6.1:1 on bg  -> AA. Links and interactive text.
- *   #D6FFB7  8.1:1 on bg  -> AA. Hover states, secondary decoration.
- *   #FFF689  8.2:1 on bg  -> AA. Blockquote rule, search match marks.
+ * Measured contrast (WCAG 2.x) against --bg #383838:
  *
- * House rule: one accent per component. Accents live on small or
- * interactive elements only. The single primary CTA is the one place an
- * accent is allowed to be a large filled area.
+ *   #FFFFFF  11.7:1 -> body text, links (links in prose carry a red
+ *                      underline so they stay distinguishable from text).
+ *   #F71735   2.9:1 -> FAILS as text and is just under 3:1 for UI
+ *                      outlines. Fills, rules, underlines, borders only.
+ *                      Never set it as `color` on text.
+ *   White on #F71735 4.1:1 -> fine for large/bold labels, short of AA
+ *                      (4.5:1) for small body text.
+ *   White on --accent-hover #D40F2C 5.4:1 -> AA.
+ *
+ * House rule: accents on small or decorative elements only. The single
+ * primary CTA is the one place the accent is a large filled area.
  */
 
 :root {
   color-scheme: dark;
 
   /* ---- Surfaces ---------------------------------------------------- */
-  --bg: #474448;
-  --bg-sunken: #3b383c;
-  --bg-raised: #524f53;
-  --bg-code: #3b383c;
-  --bg-overlay: rgba(59, 56, 60, 0.92);
+  --bg: #383838;
+  --bg-sunken: #2e2e2e;
+  --bg-raised: #444444;
+  --bg-code: #2e2e2e;
+  --bg-overlay: rgba(46, 46, 46, 0.92);
 
   /* ---- Text -------------------------------------------------------- */
-  --text: #f2f0f2;
-  --text-muted: #b9b4ba;
-  --text-faint: #968f97;
+  --text: #ffffff;
+  --text-muted: #c2c2c2; /* 6.6:1 on --bg */
+  --text-faint: #a3a3a3; /* 4.6:1 on --bg */
 
   /* ---- Lines ------------------------------------------------------- */
   --border: rgba(255, 255, 255, 0.12);
   --border-strong: rgba(255, 255, 255, 0.24);
 
-  /* ---- Accents (roles above) --------------------------------------- */
-  --accent: #ec0b43;
+  /* ---- Accent (roles above) ---------------------------------------- */
+  --accent: #f71735;
   --accent-ink: #ffffff;
-  --accent-hover: #ff2b5c;
-  --accent-link: #7ae7c7;
-  --accent-soft: #d6ffb7;
-  --accent-mark: #fff689;
+  --accent-hover: #d40f2c;
 
-  /* Low-alpha accent washes. Safe as large areas because they barely
-     shift the background luminance. */
-  --accent-wash: rgba(236, 11, 67, 0.12);
-  --accent-link-wash: rgba(122, 231, 199, 0.12);
+  /* Alpha tints of the accent. --accent-wash is safe as a large area;
+     --accent-highlight backs <mark> and search matches, white text on it
+     is 9:1. */
+  --accent-wash: rgba(247, 23, 53, 0.12);
+  --accent-highlight: rgba(247, 23, 53, 0.38);
 
   /* ---- Type -------------------------------------------------------- */
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji";
+  /* Sansation is self-hosted (see fonts.css) and ships 300/400/700 only.
+     --font-display is the same family, used at 700 for headings and
+     titles, kept as its own token so a display face can return later. */
+  --font-sans: "Sansation", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  --font-display: var(--font-sans);
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
     "Liberation Mono", monospace;
 
@@ -81,10 +87,10 @@
   --sp-8: 4rem;
 
   /* ---- Shape ------------------------------------------------------- */
-  --radius-sm: 4px;
-  --radius: 8px;
-  --radius-lg: 14px;
-  --radius-pill: 999px;
+  --radius-sm: 0;
+  --radius: 0;
+  --radius-lg: 0;
+  --radius-pill: 0;
 
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.28), 0 4px 16px rgba(0, 0, 0, 0.18);
 
