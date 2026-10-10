@@ -176,7 +176,7 @@ assert_contains "social icons rendered"         "index.html" 'class="socials"'
 assert_contains "recent posts rendered"         "index.html" 'class="entry"'
 assert_contains "carousel rendered"             "index.html" 'data-carousel-root'
 assert_contains "carousel script loaded"        "index.html" 'js/carousel'
-assert_contains "newsletter section rendered"   "index.html" 'id="newsletter"'
+assert_absent   "newsletter section removed"    "index.html" 'id="newsletter"'
 assert_contains "badges have alt text"          "index.html" 'alt="AWS Certified Solutions Architect'
 
 echo

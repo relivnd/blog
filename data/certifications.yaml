@@ -26,6 +26,10 @@
   issuer: "Amazon Web Services"
   image: "/aboutme/aws-certified-devops-engineer-professional.png"
 
+- title: "AWS Certified Advanced Networking Specialty"
+  issuer: "Amazon Web Services"
+  image: "/aboutme/aws-certified-advanced-networking-specialty.png"
+
 - title: "AWS Certified Developer – Associate"
   issuer: "Amazon Web Services"
   image: "/aboutme/aws-certified-developer-associate.png"
