@@ -9,8 +9,6 @@ social:
   fediverse_creator: "@relivnd@mastodon.social"
 ---
 
-![Header](Develop-remotely-with-Zed---AWS-1.png)
-
 **tl;dr** Zed, a fast Rust-based code editor, now supports remote development via SSH, letting developers offload resource-heavy tasks to cloud servers like AWS EC2. This feature simplifies workflows, enables cross-device coding, and supports projects requiring specific architectures or AWS integrations. A quick setup guide outlines connecting Zed to EC2 for seamless remote coding.
 
 ## Remote Development & Zed

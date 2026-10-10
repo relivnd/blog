@@ -9,8 +9,6 @@ social:
   fediverse_creator: "@relivnd@mastodon.social"
 ---
 
-![Header Image](Who-Is-RAG.png)
-
 **tl;dr** We've used a gamified approach to showcase how _Retrieval Augmented Generation_ enables businesses to use _Large Language Models_ in combination with their company data. Based on the popular board game _Who-Is-It?_, we created a demo.
 
 ## Motivation

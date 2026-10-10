@@ -4,7 +4,6 @@ date: '2025-05-13T00:00:00+02:00'
 summary: "Managing AWS infrastructure with Crossplane, and defining AWS resources inside Helm charts as a practical GitOps approach to infrastructure as code."
 event: "Containers on AWS Meetup"
 location: "Amazon Webservices Zürich, Marsstrasse 2 · 8002 Zürich"
-# Approximate coordinates — verify the exact pin on openstreetmap.org.
 lat: 47.3614239
 lon: 8.5346886
 zoom: 16

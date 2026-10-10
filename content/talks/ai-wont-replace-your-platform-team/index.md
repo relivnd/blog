@@ -4,7 +4,6 @@ date: '2025-06-11T00:00:00+02:00'
 summary: "Tracing the evolution of how we interact with Kubernetes — from hand-crafted YAML manifests to AI agents that understand your cluster."
 event: "Cloud Native Zürich"
 location: "Kino Abaton, Heinrichstrasse 269 · 8005 Zürich"
-# Approximate coordinates — verify the exact pin on openstreetmap.org.
 lat: 47.3892619
 lon: 8.5215125
 zoom: 16

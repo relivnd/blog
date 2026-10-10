@@ -9,12 +9,6 @@ social:
   fediverse_creator: "@relivnd@mastodon.social"
 ---
 
-![](Bachelor-Thesis_Cover.png)
-
-
-
-
-
 As a project for my bachelor thesis, a deployment strategy and a monitoring system for the aWall research project of the IMVS of the FHNW was developed together with a project partner in order to be able to operate aWall on a Kubernetes platform. Modern GitOps methods and tools were used for this.
 
 ## Introduction

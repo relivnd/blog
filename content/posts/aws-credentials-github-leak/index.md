@@ -9,8 +9,6 @@ social:
   fediverse_creator: "@relivnd@mastodon.social"
 ---
 
-![Header Image](Blog_Post_Title_Picture-1.png)
-
 Mishaps can happen. An ill-considered `git add .` and you accidentally push your .env file containing AWS credentials into a public GitHub repository. I've conducted a small experiment with an empty account to show you what happens next.
 
 ❗**Never experiment with credentials in a production environment with productive workloads.** Serious consequences can occur. In this example, the used account was deleted after the experiment.
