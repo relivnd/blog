@@ -4,7 +4,6 @@ date: '2025-11-18T00:00:00+01:00'
 summary: "Not every application needs Kubernetes. How Amazon ECS offers a simple, scalable and cost-efficient way to run small or single-purpose apps."
 event: "Containers on AWS Meetup"
 location: "Bluelion, Josefstrasse 219 · 8005 Zurich"
-# Approximate coordinates — verify the exact pin on openstreetmap.org.
 lat: 47.3875694
 lon: 8.5210448
 zoom: 16
