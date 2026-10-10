@@ -5,8 +5,8 @@ summary: "Managing AWS infrastructure with Crossplane, and defining AWS resource
 event: "Containers on AWS Meetup"
 location: "Amazon Webservices Zürich, Marsstrasse 2 · 8002 Zürich"
 # Approximate coordinates — verify the exact pin on openstreetmap.org.
-lat: 47.3648
-lon: 8.5262
+lat: 47.3614239
+lon: 8.5346886
 zoom: 16
 youtube: "https://www.youtube.com/watch?v=Nveyjcz_egc"
 tags: ["AWS", "Kubernetes", "GitOps", "Crossplane", "DevOps"]

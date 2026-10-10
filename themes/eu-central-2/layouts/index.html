@@ -38,9 +38,6 @@
   {{ partial "tag_cloud.html" (dict "limit" (site.Params.homeTagLimit | default 24)) }}
 </section>
 {{- end }}
-
-{{- /* Newsletter */ -}}
-{{ partial "newsletter.html" . }}
 {{- end -}}
 
 {{- define "scripts" -}}

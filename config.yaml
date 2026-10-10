@@ -135,6 +135,3 @@ menus:
     - name: "About"
       url: "/aboutme/"
       weight: 40
-    - name: "Topics"
-      url: "/tags/"
-      weight: 50

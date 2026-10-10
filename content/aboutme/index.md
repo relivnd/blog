@@ -29,13 +29,5 @@ As of 2025 I'm part of the AWS Community Builder program. I'm also helping to or
 
 ![](/Community-Builders-social-1200px.png)
 
-# Certifications
-| 	|  	|  	|
-|:-:	|:-:	|:-:	|
-|   ![](/aws-certified-solutions-architect-professional.png)	|   ![](/aws-certified-devops-engineer-professional.png)	|  	|
-|   ![](/aws-certified-developer-associate.png)	|   ![](/aws-certified-solutions-architect-associate.png)	|  ![](/aws-certified-sysops-administrator-associate.png) 	|
-|   ![](/capa-certified-argo-project-associate.png)	|   ![](/hashicorp-certified-terraform-associate-003.png)	|   	|
-|   ![](/cka-certified-kubernetes-administrator.png)	|   ![](/ckad-certified-kubernetes-application-developer.png)	|   	|
-
 ## Leisure time
 In my leisure time, I like doing and watching sports. I run weekly with my running group through the streets of Zürich and on weekends I'm busy following the German Bundesliga or Formula 1. I love watching documentaries and reading the news. Since I spend a lot of time in front of computers, I compensate my screen time with a considerable houseplant collection and a lot of sport. On vacation, I prefer visiting museums to lying at the beach and the north over the south.

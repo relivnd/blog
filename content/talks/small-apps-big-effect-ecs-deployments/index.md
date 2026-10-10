@@ -5,8 +5,8 @@ summary: "Not every application needs Kubernetes. How Amazon ECS offers a simple
 event: "Containers on AWS Meetup"
 location: "Bluelion, Josefstrasse 219 · 8005 Zurich"
 # Approximate coordinates — verify the exact pin on openstreetmap.org.
-lat: 47.3888
-lon: 8.5175
+lat: 47.3875694
+lon: 8.5210448
 zoom: 16
 youtube: "https://youtu.be/aStcZ3C2zDA"
 tags: ["AWS", "ECS", "Containers", "DevOps"]

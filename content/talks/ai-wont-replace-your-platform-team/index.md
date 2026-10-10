@@ -5,8 +5,8 @@ summary: "Tracing the evolution of how we interact with Kubernetes — from hand
 event: "Cloud Native Zürich"
 location: "Kino Abaton, Heinrichstrasse 269 · 8005 Zürich"
 # Approximate coordinates — verify the exact pin on openstreetmap.org.
-lat: 47.3897
-lon: 8.5203
+lat: 47.3892619
+lon: 8.5215125
 zoom: 16
 youtube: "https://www.youtube.com/watch?v=P_3qzmZ3_8M"
 tags: ["Kubernetes", "AI", "MCP", "Platform Engineering", "Cloud Native"]
