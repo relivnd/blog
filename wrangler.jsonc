@@ -1,0 +1,10 @@
+  {
+    "$schema": "node_modules/wrangler/config-schema.json",
+    "name": "eu-central-2",
+    "compatibility_date": "2026-10-19",
+    "assets": {
+      "directory": "./public",
+      "not_found_handling": "404-page"   // serves Hugo's 404.html for unknown paths
+    },
+    "observability": { "enabled": true }
+  }
